@@ -39,7 +39,14 @@ namespace Repositories
                 if (context.Players is not null)
                 {
                     await context.Players.AddAsync(player.ToEntity());
-                    return await context.SaveChangesAsync() == 1;
+                    try
+                    {
+                        return await context.SaveChangesAsync() == 1;
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        return false;
+                    }
                 }
                 return false;
             }

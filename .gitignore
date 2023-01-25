@@ -427,4 +427,6 @@ FodyWeavers.xsd
 # EF
 
 *.db
+*.db-shm
+*.db-wal
 src/Entities/Migrations

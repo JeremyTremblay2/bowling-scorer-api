@@ -30,25 +30,26 @@ namespace Services
             {
                 throw new FunctionnalException("A player with the same ID already exists");
             }
-            await _playerRepository.AddPlayer(player);
+            if (!await _playerRepository.AddPlayer(player))
+            {
+                throw new FunctionnalException("Failed to add the player (error while saving)");
+            }
         }
 
         public async void EditPlayer(Player player)
         {
-            if (GetById(player.ID) is null)
+            if (GetById(player.ID) is null || !await _playerRepository.EditPlayer(player))
             {
                 throw new FunctionnalException("The player that you want to edit doesn't exists");
             }
-            await _playerRepository.EditPlayer(player);
         }
 
         public async void DeletePlayer(int id)
         {
-            if (GetById(id) is null)
+            if (GetById(id) is null || !await _playerRepository.RemovePlayer(id))
             {
                 throw new FunctionnalException("The player that you want to delete doesn't exists");
             }
-            await _playerRepository.RemovePlayer(id);
         }
     }
 }
