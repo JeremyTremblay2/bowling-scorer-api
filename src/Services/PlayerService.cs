@@ -24,7 +24,7 @@ namespace Services
             return await _playerRepository.GetById(id);
         }
 
-        public async void AddPlayer(Player player)
+        public async Task AddPlayer(Player player)
         {
             if (GetById(player.ID) is null)
             {
@@ -36,7 +36,7 @@ namespace Services
             }
         }
 
-        public async void EditPlayer(Player player)
+        public async Task EditPlayer(Player player)
         {
             if (GetById(player.ID) is null || !await _playerRepository.EditPlayer(player))
             {
@@ -44,7 +44,7 @@ namespace Services
             }
         }
 
-        public async void DeletePlayer(int id)
+        public async Task DeletePlayer(int id)
         {
             if (GetById(id) is null || !await _playerRepository.RemovePlayer(id))
             {

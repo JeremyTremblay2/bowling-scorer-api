@@ -12,8 +12,8 @@ namespace Services
     {
         Task<IEnumerable<Player>> GetAll();
         Task<Player?> GetById(int id);
-        void AddPlayer(Player player);
-        void EditPlayer(Player player);
-        void DeletePlayer(int id);
+        Task AddPlayer(Player player);
+        Task EditPlayer(Player player);
+        Task DeletePlayer(int id);
     }
 }

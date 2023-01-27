@@ -51,12 +51,12 @@ namespace RestfulAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Add([Bind("Id, Name, Image")] PlayerDTO playerDTO)
+        public async Task<IActionResult> Add([Bind("Id, Name, Image")] PlayerDTO playerDTO)
         {
             _logger.LogInformation($"API Call : Add(), Arguments = \"{playerDTO}\"");
             try
             {
-                _playerService.AddPlayer(playerDTO.ToModel());
+                await _playerService.AddPlayer(playerDTO.ToModel());
                 return Ok();
             }
             catch (FunctionnalException e)
@@ -68,12 +68,12 @@ namespace RestfulAPI.Controllers
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Edit([Bind("Id, Name, Image")] PlayerDTO playerDTO)
+        public async Task<IActionResult> Edit([Bind("Id, Name, Image")] PlayerDTO playerDTO)
         {
             _logger.LogInformation($"API Call : Edit(), Arguments = \"{playerDTO}\"");
             try
             {
-                _playerService.EditPlayer(playerDTO.ToModel());
+                await _playerService.EditPlayer(playerDTO.ToModel());
                 return Ok();
             }
             catch (FunctionnalException e)
@@ -85,12 +85,12 @@ namespace RestfulAPI.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             _logger.LogInformation($"API Call : Delete(), Arguments = Id=\"{id}\"");
             try
             {
-                _playerService.DeletePlayer(id);
+                await _playerService.DeletePlayer(id);
                 return Ok();
             }
             catch (FunctionnalException e)
