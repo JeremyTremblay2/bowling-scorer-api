@@ -75,7 +75,7 @@ Also, look at the `doc` folder at the root of this repository!
 
 **Mickaël DUBOIS**
 
-* GitLab: [@omage2028](https://gitlab.com/omega2028)
+* GitLab: [@omega2028](https://gitlab.com/omega2028)
 * LinkedIn: [@Mickaël Dubois](https://www.linkedin.com/in/micka%C3%ABl-dubois-174827212/)
 
 ## 📝 License
