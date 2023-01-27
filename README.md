@@ -14,12 +14,12 @@ This project will use and cover a Restful API for the player part, and use some 
 
 These features will be available in the future, when the API will be completely finished, so stay tuned to be notified when there will be available !
 
-### 🕹️ Restful API:
+### 🕹️ Restful API
 - [ ] Request player's data (name, url of his profile picture, ID...)
 - [ ] Get the statistics of the players (medium throw, best score, number of games (won, loose...), throws results and scores more generally).
 - [ ] Create players and change their names and profile pictures, and also their statistics.
 
-### 🎙️ Web sockets:
+### 🎙️ Web sockets
 - [ ] Get information about bowling games (date of the game, status...)
 - [ ] Get informations about the scores (detail for each player present in the game), current cell in the scoretable, current score...
 - [ ] Add and edit the scores in the score table, create some games and achieve them.
