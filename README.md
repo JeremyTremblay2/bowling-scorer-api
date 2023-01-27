@@ -1,5 +1,6 @@
 [![Build Status](https://codefirst.iut.uca.fr/api/badges/jeremy.tremblay/bowling-scorer-api/status.svg)](https://codefirst.iut.uca.fr/jeremy.tremblay/bowling-scorer-api)
 [![Bugs](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=bugs&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Code Smells](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=code_smells&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
 
 <h1 align="center">🎳 Bowling Scorer API 🎳</h1>
 
