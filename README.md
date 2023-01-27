@@ -1,3 +1,5 @@
+[![Build Status](https://codefirst.iut.uca.fr/api/badges/jeremy.tremblay/bowling-scorer-api/status.svg)](https://codefirst.iut.uca.fr/jeremy.tremblay/bowling-scorer-api)
+
 <h1 align="center">🎳 Bowling Scorer API 🎳</h1>
 
 The goal of this project is to develop a functionnal API to manage bowling scores, players, statistics and games.
