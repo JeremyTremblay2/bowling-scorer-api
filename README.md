@@ -1,3 +1,17 @@
+[![Build Status](https://codefirst.iut.uca.fr/api/badges/jeremy.tremblay/bowling-scorer-api/status.svg)](https://codefirst.iut.uca.fr/jeremy.tremblay/bowling-scorer-api)
+[![Bugs](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=bugs&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api-token)
+[![Code Smells](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=code_smells&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api-token)
+[![Coverage](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=coverage&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Duplicated Lines (%)](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=duplicated_lines_density&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Lines of Code](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=ncloc&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Maintainability Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=sqale_rating&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=alert_status&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Reliability Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=reliability_rating&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Security Hotspots](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=security_hotspots&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Security Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=security_rating&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Technical Debt](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=sqale_index&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Vulnerabilities](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=vulnerabilities&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+
 <h1 align="center">🎳 Bowling Scorer API 🎳</h1>
 
 The goal of this project is to develop a functionnal API to manage bowling scores, players, statistics and games.
@@ -12,12 +26,12 @@ This project will use and cover a Restful API for the player part, and use some 
 
 These features will be available in the future, when the API will be completely finished, so stay tuned to be notified when there will be available !
 
-### 🕹️ Restful API:
+### 🕹️ Restful API
 - [ ] Request player's data (name, url of his profile picture, ID...)
 - [ ] Get the statistics of the players (medium throw, best score, number of games (won, loose...), throws results and scores more generally).
 - [ ] Create players and change their names and profile pictures, and also their statistics.
 
-### 🎙️ Web sockets:
+### 🎙️ Web sockets
 - [ ] Get information about bowling games (date of the game, status...)
 - [ ] Get informations about the scores (detail for each player present in the game), current cell in the scoretable, current score...
 - [ ] Add and edit the scores in the score table, create some games and achieve them.
