@@ -53,8 +53,8 @@ cd RestfulAPI
 
 ```ps
 
-dotnet ef migrations add Test --project ../Entities --context BowlingDbContext
-dotnet ef database update Test --project ../Entities --context BowlingDbContext
+dotnet ef migrations add bowlingMigration --project ../Entities --context BowlingDbContext
+dotnet ef database update bowlingMigration --project ../Entities --context BowlingDbContext
 
 ```
 
@@ -62,7 +62,7 @@ dotnet ef database update Test --project ../Entities --context BowlingDbContext
 
 ## 📌 Documentation & developper guidance
 
-If you want to participate to this project, be sure to check the documentation before, on the [Wiki]("https://codefirst.iut.uca.fr/git/jeremy.tremblay/bowling-scorer-api/wiki") of this project.
+If you want to participate to this project, be sure to check the documentation before, on the [Wiki](https://codefirst.iut.uca.fr/git/jeremy.tremblay/bowling-scorer-api/wiki) of this project.
 
 Also, look at the `doc` folder at the root of this repository!
 
@@ -73,7 +73,10 @@ Also, look at the `doc` folder at the root of this repository!
 * Github: [@JeremyTremblay2](https://github.com/JeremyTremblay2)
 * LinkedIn: [@Jérémy Tremblay](https://fr.linkedin.com/in/j%C3%A9r%C3%A9my-tremblay2)
 
-**Mickael DUBOIS**
+**Mickaël DUBOIS**
+
+* GitLab: [@omage2028](https://gitlab.com/omega2028)
+* LinkedIn: [@Mickaël Dubois](https://www.linkedin.com/in/micka%C3%ABl-dubois-174827212/)
 
 ## 📝 License
 
