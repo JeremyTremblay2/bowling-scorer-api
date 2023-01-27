@@ -20,12 +20,12 @@ namespace Model
         /// <summary>
         /// The name of the player.
         /// </summary>
-        public string Name { get; internal set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The profil picture of the player.
         /// </summary>
-        public string Image { get; internal set; }
+        public string Image { get; private set; }
 
         /// <summary>
         /// The player's statistics.
