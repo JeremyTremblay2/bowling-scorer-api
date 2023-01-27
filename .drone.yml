@@ -13,29 +13,29 @@ steps:
       - name: docs
         path: /docs
     commands:
-      - cd Sources/
-      - dotnet restore Solution.sln
-      - dotnet build Solution.sln -c Release --no-restore
-      - dotnet publish Solution.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+      - cd src/
+      - dotnet restore BowlingScorerApi.sln
+      - dotnet build BowlingScorerApi.sln -c Release --no-restore
+      - dotnet publish BowlingScorerApi.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
 
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:6.0
     commands:
-      - cd Sources/
-      - dotnet restore Solution.sln
-      - dotnet test Solution.sln --no-restore
+      - cd src/
+      - dotnet restore BowlingScorerApi.sln
+      - dotnet test BowlingScorerApi.sln --no-restore
     depends_on: [build]
 
   - name: code-analysis
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dronesonarplugin-dotnet6
     commands:
-      - cd Sources/
-      - dotnet restore Solution.sln
-      - dotnet sonarscanner begin /k:bowling-scorer /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
-      - dotnet build Solution.sln -c Release --no-restore
-      - dotnet test Solution.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
+      - cd src/
+      - dotnet restore BowlingScorerApi.sln
+      - dotnet sonarscanner begin /k:bowling-scorer-api /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="TestAPI/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
+      - dotnet build BowlingScorerApi.sln -c Release --no-restore
+      - dotnet test BowlingScorerApi.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
-      - dotnet publish Solution.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+      - dotnet publish BowlingScorerApi.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
     secrets: [ SECRET_SONAR_LOGIN ]
     settings:
