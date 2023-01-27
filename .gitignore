@@ -424,3 +424,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# EF
+
+*.db
+*.db-shm
+*.db-wal
+src/Entities/Migrations
