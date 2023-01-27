@@ -3,6 +3,14 @@
 [![Code Smells](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=code_smells&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api-token)
 [![Coverage](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=coverage&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
 [![Duplicated Lines (%)](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=duplicated_lines_density&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Lines of Code](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=ncloc&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Maintainability Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=sqale_rating&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=alert_status&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Reliability Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=reliability_rating&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Security Hotspots](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=security_hotspots&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Security Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=security_rating&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Technical Debt](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=sqale_index&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
+[![Vulnerabilities](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=bowling-scorer-api&metric=vulnerabilities&token=249c19b1a829285d93c10d5a8ea13706901d6f71)](https://codefirst.iut.uca.fr/sonar/dashboard?id=bowling-scorer-api)
 
 <h1 align="center">🎳 Bowling Scorer API 🎳</h1>
 
