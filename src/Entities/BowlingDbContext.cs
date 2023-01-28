@@ -68,12 +68,6 @@ namespace Entities
                         .Property(e => e.Scores)
                         .HasConversion(intArrayValueConverter);*/
 
-            modelBuilder.Entity<PlayerEntity>().HasData(
-                new PlayerEntity { ID = 1, Name = "Mickael", Image = "imageMickael.png" },
-                new PlayerEntity { ID = 2, Name = "Jeremy", Image = "imageJeremy.png" },
-                new PlayerEntity { ID = 3, Name = "Lucas", Image = "imageLucas.png" }
-            );
-
             modelBuilder.Entity<StatisticsEntity>().HasData(
                 new StatisticsEntity
                 {
@@ -103,6 +97,14 @@ namespace Entities
                     //Scores = {}
                 }
             );
+
+            modelBuilder.Entity<PlayerEntity>().HasData(
+                new PlayerEntity { ID = 1, Name = "Mickael", Image = "imageMickael.png" },
+                new PlayerEntity { ID = 2, Name = "Jeremy", Image = "imageJeremy.png" },
+                new PlayerEntity { ID = 3, Name = "Lucas", Image = "imageLucas.png" }
+            );
+
+            
 
             
 

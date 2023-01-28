@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace EntityToModel
 {
-    public class StatisticsExtensions
+    public static class StatisticsExtensions
     {
-        public Statistics ToModel(StatisticsEntity entity)
+        public static Statistics ToModel(this StatisticsEntity entity)
         {
             return new Statistics(entity.Player.ToModel(), entity.NumberOfVictory, entity.NumberOfDefeat, /*entity.Scores*/ null, entity.ID);
         }
 
-        public StatisticsEntity ToEntity(Statistics model)
+        public static StatisticsEntity ToEntity(this Statistics model)
         {
             return new StatisticsEntity
             {
@@ -24,7 +24,8 @@ namespace EntityToModel
                 NumberOfVictory = model.NumberOfVictory,
                 NumberOfGames = model.NumberOfGames,
                 //Scores = model.Scores,
-                BestScore = model.BestScore
+                BestScore = model.BestScore,
+                Player = model.Player.ToEntity()
             };
         }
     }
