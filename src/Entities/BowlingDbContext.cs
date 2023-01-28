@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
+using System.Xml.Linq;
 
 
 namespace Entities
@@ -13,6 +16,8 @@ namespace Entities
         /// Contains a set of PlayerEntity which represents the players contained in our application.
         /// </summary>
         public DbSet<PlayerEntity>? Players { get; set; }
+
+        public DbSet<StatisticsEntity>? Statistics { get; set; }
 
         public BowlingDbContext()
         { }
@@ -40,6 +45,8 @@ namespace Entities
         /// <param name="modelBuilder">The model builder.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             //Players
             modelBuilder.Entity<PlayerEntity>().ToTable("Player");
             modelBuilder.Entity<PlayerEntity>().Property(n => n.Name)
@@ -48,13 +55,58 @@ namespace Entities
             modelBuilder.Entity<PlayerEntity>().Property(n => n.ID)
                                                .ValueGeneratedOnAdd();
 
+            modelBuilder.Entity<PlayerEntity>()
+                        .HasOne(n => n.Statistics) 
+                        .WithOne(c => c.Player)
+                        .HasForeignKey<StatisticsEntity>(c => c.ID);
+
+            var intArrayValueConverter = new ValueConverter<int[], string>(
+                    i => string.Join(",", i),
+                    s => string.IsNullOrWhiteSpace(s) ? new int[0] : s.Split(new[] { ',' }).Select(v => int.Parse(v)).ToArray());
+
+            /*modelBuilder.Entity<StatisticsEntity>()
+                        .Property(e => e.Scores)
+                        .HasConversion(intArrayValueConverter);*/
+
             modelBuilder.Entity<PlayerEntity>().HasData(
                 new PlayerEntity { ID = 1, Name = "Mickael", Image = "imageMickael.png" },
                 new PlayerEntity { ID = 2, Name = "Jeremy", Image = "imageJeremy.png" },
                 new PlayerEntity { ID = 3, Name = "Lucas", Image = "imageLucas.png" }
             );
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<StatisticsEntity>().HasData(
+                new StatisticsEntity
+                {
+                    ID = 1,
+                    BestScore = 170,
+                    NumberOfDefeat = 5,
+                    NumberOfVictory = 1,
+                    NumberOfGames = 7,
+                    //Scores = { 78, 101, 120, 170, 147, 98, 121 }
+                },
+                new StatisticsEntity
+                {
+                    ID = 2,
+                    BestScore = 184,
+                    NumberOfDefeat = 1,
+                    NumberOfVictory = 2,
+                    NumberOfGames = 5,
+                    //Scores = { 142, 89, 184, 75, 86 }
+                },
+                new StatisticsEntity
+                {
+                    ID = 3,
+                    BestScore = 0,
+                    NumberOfDefeat = 0,
+                    NumberOfVictory = 0,
+                    NumberOfGames = 0,
+                    //Scores = {}
+                }
+            );
+
+            
+
+            
         }
     }
 }
