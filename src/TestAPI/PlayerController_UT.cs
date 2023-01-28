@@ -1,6 +1,7 @@
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Model;
 using Moq;
 using RestfulAPI.Controllers;
@@ -17,7 +18,7 @@ namespace TestAPI
             var _mockPlayerService = new Mock<IPlayerService>();
             _mockPlayerService.Setup(service => service.GetAll())
                 .ReturnsAsync(new List<Player> { new Player("Mickael", "mickael.png") });
-            var _mockLoger = Mock.Of<ILogger<PlayerController>>();
+            var _mockLoger = new NullLogger<PlayerController>();
             var controller = new PlayerController(_mockLoger , _mockPlayerService.Object);
 
             //Act
@@ -28,5 +29,7 @@ namespace TestAPI
             var returnValue = Assert.IsAssignableFrom<IEnumerable<PlayerDTO>>(okResult.Value);
             Assert.Equal(new List<PlayerDTO>(){ new PlayerDTO { Name = "Mickael", Image = "mickael.png" }}, returnValue);
         }
+
+
     }
 }
