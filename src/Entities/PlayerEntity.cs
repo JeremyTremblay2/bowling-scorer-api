@@ -21,6 +21,10 @@ namespace Entities
         /// The image of the player.
         /// </summary>
         public string? Image { get; set; }
-    }
 
+        /// <summary>
+        /// The player's statistics.
+        /// </summary>
+        public StatisticsEntity Statistics { get; set; }
+    }
 }
