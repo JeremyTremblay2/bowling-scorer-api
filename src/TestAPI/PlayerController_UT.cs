@@ -83,6 +83,96 @@ namespace TestAPI
             Assert.Equal(notFoundResult.Value, "This player doesn't exists.");
         }
 
+        [Fact]
+        public async void AddPlayerTest()
+        {
+            //Arrange
+            var _mockPlayerService = new Mock<IPlayerService>();
+            _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
+                .Returns<Player>(async (player) =>
+                {
+                    if (player.ID == 1)
+                    {
+                        throw new FunctionnalException("A player with the same ID already exists");
+                    }
+                    if (player.ID == 2)
+                    {
+                        throw new FunctionnalException("Failed to add the player (error while saving)");
+                    }
+                });
+            var _mockLoger = new NullLogger<PlayerController>();
+            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+            var player = new PlayerDTO { ID = 3, Image = "moi.png", Name = "Moi" };
+
+            //Act
+            var result = await controller.Add(player);
+
+            //Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.NotNull(okResult.Value);
+            Assert.Equal(okResult.Value, "Successfuly added the player id : 3");
+        }
+
+        [Fact]
+        public async void AddPlayerAlreadyExistsTest()
+        {
+            //Arrange
+            var _mockPlayerService = new Mock<IPlayerService>();
+            _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
+                .Returns<Player>(async (player) =>
+                {
+                    if (player.ID == 1)
+                    {
+                        throw new FunctionnalException("A player with the same ID already exists");
+                    }
+                    if (player.ID == 2)
+                    {
+                        throw new FunctionnalException("Failed to add the player (error while saving)");
+                    }
+                });
+            var _mockLoger = new NullLogger<PlayerController>();
+            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+            var player = new PlayerDTO { ID = 1, Image = "moi.png", Name = "Moi" };
+
+            //Act
+            var result = await controller.Add(player);
+
+            //Assert
+            var notFoundResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.NotNull(notFoundResult.Value);
+            Assert.Equal(notFoundResult.Value, "A player with the same ID already exists");
+        }
+
+        [Fact]
+        public async void AddPlayerSavingErrorTest()
+        {
+            //Arrange
+            var _mockPlayerService = new Mock<IPlayerService>();
+            _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
+                .Returns<Player>(async (player) =>
+                {
+                    if (player.ID == 1)
+                    {
+                        throw new FunctionnalException("A player with the same ID already exists");
+                    }
+                    if (player.ID == 2)
+                    {
+                        throw new FunctionnalException("Failed to add the player (error while saving)");
+                    }
+                });
+            var _mockLoger = new NullLogger<PlayerController>();
+            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+            var player = new PlayerDTO { ID = 2, Image = "moi.png", Name = "Moi" };
+
+            //Act
+            var result = await controller.Add(player);
+
+            //Assert
+            var notFoundResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.NotNull(notFoundResult.Value);
+            Assert.Equal(notFoundResult.Value, "Failed to add the player (error while saving)");
+        }
+
 
     }
 }

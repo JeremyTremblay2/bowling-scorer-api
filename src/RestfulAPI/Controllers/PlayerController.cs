@@ -52,17 +52,17 @@ namespace RestfulAPI.Controllers
                        
         }
 
+        // UTILISER CREATED AT ACTION
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // UTILISER CREATED AT ACTION
         public async Task<IActionResult> Add([Bind("Id, Name, Image")] PlayerDTO playerDTO)
         {
             _logger.LogInformation($"API Call : Add(), Arguments = \"{playerDTO}\"");
             try
             {
                 await _playerService.AddPlayer(playerDTO.ToModel());
-                return Ok();
+                return Ok("Successfuly added the player id : " + playerDTO.ID);
             }
             catch (FunctionnalException e)
             {
@@ -79,7 +79,7 @@ namespace RestfulAPI.Controllers
             try
             {
                 await _playerService.EditPlayer(playerDTO.ToModel());
-                return Ok();
+                return Ok("Successfuly edited the player id : " + playerDTO.ID);
             }
             catch (FunctionnalException e)
             {

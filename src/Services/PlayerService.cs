@@ -32,7 +32,7 @@ namespace Services
 
         public async Task AddPlayer(Player player)
         {
-            if (GetById(player.ID) is null)
+            if (GetById(player.ID) is not null)
             {
                 throw new FunctionnalException("A player with the same ID already exists");
             }
