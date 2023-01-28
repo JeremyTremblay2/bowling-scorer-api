@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,7 +31,7 @@ namespace Model
         /// <summary>
         /// The player's statistics.
         /// </summary>
-        //public Statistics Statistics { get; private set; }
+        public Statistics Statistics { get; private set; }
 
         /// <summary>
         /// Create a new instance of Player.
@@ -39,7 +40,7 @@ namespace Model
         /// <param name="name">The name of the player.</param>
         /// <param name="image">The image of the player.</param>
         /// <exception cref="ArgumentNullException">If the player's name or image is null or empty.</exception>
-        public Player(int ID, string name, string image)
+        public Player(int ID, string name, string image, Statistics? statistics = null)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -48,7 +49,8 @@ namespace Model
             this.ID = ID;
             Name = name;
             Image = image;
-            //Statistics = new Statistics();
+            Statistics = statistics ?? new Statistics(this);
+            if (!Statistics.Player.Equals(this)) throw new ArgumentException("The player is not the owner of these statistics.");
         }
 
         /// <summary>

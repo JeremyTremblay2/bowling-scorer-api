@@ -17,6 +17,16 @@ namespace Model
         private readonly IList<int> _scores;
 
         /// <summary>
+        /// Represents the ID of the statistics.
+        /// </summary>
+        public int ID { get; private set; }
+
+        /// <summary>
+        /// The player who owns these statistics.
+        /// </summary>
+        public Player Player { get; private set; }
+
+        /// <summary>
         /// Represents the number of total wins by a player.
         /// </summary>
         public int NumberOfVictory { get; private set; }
@@ -52,10 +62,16 @@ namespace Model
         /// <summary>
         /// Create a new instance of statistics.
         /// </summary>
-        public Statistics()
+        public Statistics(Player player, int numberOfVictory = 0, int numberOfDefeat = 0, IEnumerable<int>? scores = null, int ID = 0)
         {
+            Player = player ?? throw new ArgumentNullException(nameof(player), "Te player given in parameter cannot be null.");
+            if (!player.Statistics.Equals(this)) throw new ArgumentException("The player's statistics are not the same as these ones.");
+            NumberOfVictory = numberOfVictory < 0 ? throw new ArgumentException("The number of victory cannot be negative.", nameof(numberOfVictory)) : numberOfVictory;
+            NumberOfVictory = numberOfDefeat < 0 ? throw new ArgumentException("The number of defeat cannot be negative.", nameof(numberOfDefeat)) : numberOfDefeat;
+            NumberOfVictory = scores?.Count() ?? 0;
+            this.ID = ID;
             NumberOfVictory = NumberOfDefeat = BestScore = 0;
-            _scores = new List<int>();
+            _scores = scores == null ? new List<int>() : new List<int>(scores);
             Scores = new ReadOnlyCollection<int>(_scores);
         }
 
