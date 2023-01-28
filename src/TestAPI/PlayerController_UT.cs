@@ -25,6 +25,7 @@ namespace TestAPI
             var result = await controller.GetAll();
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.GetAll(), Times.Once);
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsAssignableFrom<IEnumerable<PlayerDTO>>(okResult.Value);
             Assert.Equal(new List<PlayerDTO>() { new PlayerDTO { Name = "Mickael", Image = "mickael.png" } }, returnValue);
@@ -51,6 +52,7 @@ namespace TestAPI
             var result = await controller.GetById(1);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.NotNull(okResult.Value);
             var returnValue = Assert.IsAssignableFrom<PlayerDTO>(okResult.Value);
@@ -78,6 +80,7 @@ namespace TestAPI
             var result = await controller.GetById(65);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             Assert.NotNull(notFoundResult.Value);
             Assert.Equal(notFoundResult.Value, "This player doesn't exists.");
@@ -108,6 +111,7 @@ namespace TestAPI
             var result = await controller.Add(player);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.NotNull(okResult.Value);
             Assert.Equal(okResult.Value, "Successfuly added the player id : 3");
@@ -138,6 +142,7 @@ namespace TestAPI
             var result = await controller.Add(player);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.NotNull(badRequestResult.Value);
             Assert.Equal(badRequestResult.Value, "A player with the same ID already exists");
@@ -168,6 +173,7 @@ namespace TestAPI
             var result = await controller.Add(player);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.NotNull(badRequestResult.Value);
             Assert.Equal(badRequestResult.Value, "Failed to add the player (error while saving)");
@@ -194,6 +200,7 @@ namespace TestAPI
             var result = await controller.Edit(player);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.NotNull(okResult.Value);
             Assert.Equal(okResult.Value, "Successfuly edited the player id : 3");
@@ -220,6 +227,7 @@ namespace TestAPI
             var result = await controller.Edit(player);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.NotNull(badRequestResult.Value);
             Assert.Equal(badRequestResult.Value, "The player that you want to edit doesn't exists");
@@ -245,6 +253,7 @@ namespace TestAPI
             var result = await controller.Delete(1);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.NotNull(okResult.Value);
             Assert.Equal(okResult.Value, "Successfuly delete the player id : 1");
@@ -270,6 +279,7 @@ namespace TestAPI
             var result = await controller.Delete(16);
 
             //Assert
+            _mockPlayerService.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.NotNull(badRequestResult.Value);
             Assert.Equal(badRequestResult.Value, "The player that you want to delete doesn't exists");
