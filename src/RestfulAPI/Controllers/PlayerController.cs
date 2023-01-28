@@ -8,7 +8,8 @@ using System.Runtime.CompilerServices;
 
 namespace RestfulAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class PlayerController : Controller
     {

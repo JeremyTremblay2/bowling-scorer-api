@@ -65,8 +65,17 @@ cd RestfulAPI
 
 4. Create the database by using these commands: 
 
+If **dotnet ef** is not installed on your computer :
 ```ps
-
+dotnet tool install dotnet-ef
+```
+If you are on one of the IUT's computer :
+```ps
+dotnet new tool-manifest
+dotnet tool install dotnet-ef
+```
+Generate **migrations** and **database**:
+```ps
 dotnet ef migrations add bowlingMigration --project ../Entities --context BowlingDbContext
 dotnet ef database update bowlingMigration --project ../Entities --context BowlingDbContext
 
