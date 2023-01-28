@@ -224,5 +224,55 @@ namespace TestAPI
             Assert.NotNull(badRequestResult.Value);
             Assert.Equal(badRequestResult.Value, "The player that you want to edit doesn't exists");
         }
+
+        [Fact]
+        public async void DeletePlayerTest()
+        {
+            //Arrange
+            var _mockPlayerService = new Mock<IPlayerService>();
+            _mockPlayerService.Setup(service => service.DeletePlayer(It.IsAny<int>()))
+                .Returns<int>(async (id) =>
+                {
+                    if (id == 16)
+                    {
+                        throw new FunctionnalException("The player that you want to delete doesn't exists");
+                    }
+                });
+            var _mockLoger = new NullLogger<PlayerController>();
+            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+
+            //Act
+            var result = await controller.Delete(1);
+
+            //Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.NotNull(okResult.Value);
+            Assert.Equal(okResult.Value, "Successfuly delete the player id : 1");
+        }
+
+        [Fact]
+        public async void DeletePlayerFailedTest()
+        {
+            //Arrange
+            var _mockPlayerService = new Mock<IPlayerService>();
+            _mockPlayerService.Setup(service => service.DeletePlayer(It.IsAny<int>()))
+                .Returns<int>(async (id) =>
+                {
+                    if (id == 16)
+                    {
+                        throw new FunctionnalException("The player that you want to delete doesn't exists");
+                    }
+                });
+            var _mockLoger = new NullLogger<PlayerController>();
+            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+
+            //Act
+            var result = await controller.Delete(16);
+
+            //Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.NotNull(badRequestResult.Value);
+            Assert.Equal(badRequestResult.Value, "The player that you want to delete doesn't exists");
+        }
     }
 }

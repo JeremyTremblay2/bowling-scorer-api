@@ -96,7 +96,7 @@ namespace RestfulAPI.Controllers
             try
             {
                 await _playerService.DeletePlayer(id);
-                return Ok();
+                return Ok("Successfuly delete the player id : " + id);
             }
             catch (FunctionnalException e)
             {
