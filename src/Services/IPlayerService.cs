@@ -11,7 +11,7 @@ namespace Services
     public interface IPlayerService
     {
         Task<IEnumerable<Player>> GetAll();
-        Task<Player?> GetById(int id);
+        Task<Player> GetById(int id);
         Task AddPlayer(Player player);
         Task EditPlayer(Player player);
         Task DeletePlayer(int id);

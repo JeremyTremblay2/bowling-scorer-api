@@ -19,10 +19,16 @@ namespace Services
             return await _playerRepository.GetAll();
         }
 
-        public async Task<Player?> GetById(int id)
+        public async Task<Player> GetById(int id)
         {
-            return await _playerRepository.GetById(id);
+            Player? player = await _playerRepository.GetById(id);
+            if (player is null)
+            {
+                throw new FunctionnalException("This player doesn't exists.");
+            }
+            return player;
         }
+             
 
         public async Task AddPlayer(Player player)
         {

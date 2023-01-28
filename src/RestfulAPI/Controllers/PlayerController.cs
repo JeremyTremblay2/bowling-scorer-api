@@ -40,17 +40,22 @@ namespace RestfulAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             _logger.LogInformation($"API Call : GetById(), Arguments = \"ID={id}\"");
-            Player? player = await _playerService.GetById(id);
-            if (player is null)
+            try
             {
-                return NotFound("This player doesn't exists !");
+                Player player = await _playerService.GetById(id);
+                return Ok(player.ToDTO());
             }
-            return Ok(player.ToDTO());            
+            catch (FunctionnalException e)
+            {
+                return NotFound(e.Message);
+            }
+                       
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // UTILISER CREATED AT ACTION
         public async Task<IActionResult> Add([Bind("Id, Name, Image")] PlayerDTO playerDTO)
         {
             _logger.LogInformation($"API Call : Add(), Arguments = \"{playerDTO}\"");
