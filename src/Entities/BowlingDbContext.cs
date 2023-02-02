@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
 
 
 namespace Entities
@@ -56,19 +57,22 @@ namespace Entities
                                                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<PlayerEntity>()
-                        .HasOne(n => n.Statistics) 
-                        .WithOne(c => c.Player)
-                        .HasForeignKey<StatisticsEntity>(c => c.ID);
+                        .HasOne(p => p.Statistics) 
+                        .WithOne(s => s.Player)
+                        .HasForeignKey<StatisticsEntity>(s => s.ID);
 
+            /* Used to save the scores. Not implemented.
             var intArrayValueConverter = new ValueConverter<int[], string>(
-                    i => string.Join(",", i),
-                    s => string.IsNullOrWhiteSpace(s) ? new int[0] : s.Split(new[] { ',' }).Select(v => int.Parse(v)).ToArray());
+                i => string.Join(",", i),
+                s => string.IsNullOrWhiteSpace(s) ? new int[0] : s.Split(new[] { ',' }).Select(v => int.Parse(v)).ToArray());
+            modelBuilder.Entity<StatisticsEntity>()
+                .Property(e => e.Scores)
+                .HasConversion(intArrayValueConverter);
+            */
 
-            /*modelBuilder.Entity<StatisticsEntity>()
-                        .Property(e => e.Scores)
-                        .HasConversion(intArrayValueConverter);*/
+            string randomImagesWebsite = @"https://picsum.photos/400";
 
-            modelBuilder.Entity<StatisticsEntity>().HasData(
+            var stats = new StatisticsEntity[] {
                 new StatisticsEntity
                 {
                     ID = 1,
@@ -96,19 +100,21 @@ namespace Entities
                     NumberOfGames = 0,
                     //Scores = {}
                 }
-            );
+            };
 
-            modelBuilder.Entity<PlayerEntity>().HasData(
-                new PlayerEntity { ID = 1, Name = "Mickael", Image = "imageMickael.png" },
-                new PlayerEntity { ID = 2, Name = "Jeremy", Image = "imageJeremy.png" },
-                new PlayerEntity { ID = 3, Name = "Lucas", Image = "imageLucas.png" }
-            );
+            var players = new PlayerEntity[]
+            {
+                new PlayerEntity { ID = stats[0].ID, Name = "Mickael", Image = randomImagesWebsite/*, Statistics = stats[0]*/ },
+                new PlayerEntity { ID = stats[1].ID, Name = "Jeremy", Image = randomImagesWebsite/*, Statistics = stats[1]*/ },
+                new PlayerEntity { ID = stats[2].ID, Name = "Lucas", Image = randomImagesWebsite/*, Statistics = stats[2]*/ }
+            };
 
-            
+            /*stats[0].Player = players[0];
+            stats[1].Player = players[1];
+            stats[2].Player = players[2];*/
 
-            
-
-            
+            modelBuilder.Entity<StatisticsEntity>().HasData(stats);
+            modelBuilder.Entity<PlayerEntity>().HasData(players);
         }
     }
 }
