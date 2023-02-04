@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcClient";
+
+package bowling;
+
+// The bowling service definition.
+service PlayerProtoService {
+  // Sends a request to 
+  rpc getPlayerById (PlayerRequest) returns (PlayerReply);
+}
+
+// The request send by the client
+message PlayerRequest {
+  //Id of the player asked
+  string player_id = 1; // position
+}
+
+// The response message containing the asked Player.
+message PlayerReply {
+  // Id of the player asked
+  int32 player_id = 1;
+  // Name of the player asked
+  string name = 2;
+  // Image of the player asked
+  string image = 3;
+}

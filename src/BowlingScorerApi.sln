@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAPI", "TestAPI\TestAPI.csproj", "{176D1499-C640-46CC-A6BF-B45A0D45A402}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcAPI", "GrpcAPI\GrpcAPI.csproj", "{7B59C422-5ED4-4CCC-BBC0-A0AC24AACC70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcAPI", "GrpcAPI\GrpcAPI.csproj", "{7B59C422-5ED4-4CCC-BBC0-A0AC24AACC70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcClient", "GrpcClient\GrpcClient.csproj", "{475DAD8F-D51E-428A-B6E4-0668F2BBCDDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{7B59C422-5ED4-4CCC-BBC0-A0AC24AACC70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B59C422-5ED4-4CCC-BBC0-A0AC24AACC70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B59C422-5ED4-4CCC-BBC0-A0AC24AACC70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{475DAD8F-D51E-428A-B6E4-0668F2BBCDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{475DAD8F-D51E-428A-B6E4-0668F2BBCDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{475DAD8F-D51E-428A-B6E4-0668F2BBCDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{475DAD8F-D51E-428A-B6E4-0668F2BBCDDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
