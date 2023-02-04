@@ -17,7 +17,7 @@ namespace Repositories
 {
     public class PlayerRepository : IPlayerRepository
     {
-        public async Task<IEnumerable<Player>> GetAll()
+        public async Task<IEnumerable<Player>> GetAll(int page, int nbPlayers)
         {
             using (BowlingDbContext context = new())
             {
@@ -25,6 +25,8 @@ namespace Repositories
                 if (context.Players is not null)
                 {
                     players = await context.Players
+                        .Skip(nbPlayers*page)
+                        .Take(nbPlayers)
                         .Select(pl => pl.ToModel())
                         .ToListAsync(); // force the query
                 }

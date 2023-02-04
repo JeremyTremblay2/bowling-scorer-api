@@ -14,9 +14,9 @@ namespace Services
             _playerRepository = playerRepository;
         }
 
-        public async Task<IEnumerable<Player>> GetAll()
+        public async Task<IEnumerable<Player>> GetAll(int page, int nbPlayers)
         {
-            return await _playerRepository.GetAll();
+            return await _playerRepository.GetAll(page, nbPlayers);
         }
 
         public async Task<Player> GetById(int id)
