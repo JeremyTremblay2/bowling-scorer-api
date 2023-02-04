@@ -12,7 +12,7 @@ namespace RestfulAPI.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class PlayerController : Controller
-    {
+    {  
         private readonly ILogger _logger;
         private readonly IPlayerService _playerService;
 
