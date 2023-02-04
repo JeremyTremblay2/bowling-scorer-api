@@ -1,0 +1,33 @@
+{
+  "Routes": [
+    // Player API
+    {
+      "UpstreamPathTemplate": "/api/Player",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7209
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/Player"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Player/{id}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7209
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/Player/{id}"
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5072"
+  }
+}
