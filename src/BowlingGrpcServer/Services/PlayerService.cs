@@ -44,7 +44,15 @@ namespace BowlingGrpcServer.Services
         public override async Task<AddPlayerReply> AddPlayer(AddPlayerRequest request, ServerCallContext context)
         {
             AddPlayerReply addPlayerReply = new AddPlayerReply();
-            addPlayerReply.Response = "Added the player.";
+            var ok = await _playerRepository.AddPlayer(new Player(request.Id, request.Name, request.Image));
+            if (ok)
+            {
+                addPlayerReply.Response = "Added the player.";
+            }
+            else
+            {
+                addPlayerReply.Response = "Can't add the player (he already exists or id is not suitable)";
+            }
             return addPlayerReply;
         }
 

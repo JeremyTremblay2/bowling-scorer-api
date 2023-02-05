@@ -47,8 +47,15 @@ while (run)
             Console.WriteLine("GetByIdResult: " + getByIdResult.PlayerGRPC);
             break;
         case 3:
+            Console.Write("Player's id : ");
+            var playerToAddId = Prompter.PromptInt();
+            Console.Write("Player's Name : ");
+            var playerToAddName = Console.ReadLine();
+            Console.Write("Player's Image : ");
+            var playerToAddImage = Console.ReadLine();
+
             var addPlayerResult = await client.AddPlayerAsync(
-                  new AddPlayerRequest { Id = 1, Name = "toto", Image = "truc.png" });
+                  new AddPlayerRequest { Id = playerToAddId, Name = playerToAddImage, Image = playerToAddName });
             Console.WriteLine("AddPlayerResult: " + addPlayerResult.Response);
             break;
         case 4:
