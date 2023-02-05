@@ -53,8 +53,12 @@ while (run)
                   new AddPlayerRequest { Id = 1, Name = "toto", Image = "truc.png" });
             Console.WriteLine("AddPlayerResult: " + addPlayerResult.Response);
             break;
+        case 4:
+            var editPlayerResult = await client.EditPlayerAsync(
+                  new EditPlayerRequest { Id = 1, Name = "toto", Image = "truc.png" });
+            Console.WriteLine("EditPlayerResult: " + editPlayerResult.Response);
+            break;
         default:
-            run= false;
             break;
     }
 }

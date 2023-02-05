@@ -1,14 +1,15 @@
 syntax = "proto3";
 
-option csharp_namespace = "BowlingGrpcServer";
+option csharp_namespace = "BowlingGrpcClient";
 
-package greet;
+package player;
 
 // The greeting service definition.
 service Player {
   rpc GetAll (GetAllRequest) returns (GetAllReply);
   rpc GetById (GetByIdRequest) returns (GetByIdReply);
   rpc AddPlayer (AddPlayerRequest) returns (AddPlayerReply);
+  rpc EditPlayer (EditPlayerRequest) returns (EditPlayerReply);
 }
 
 message GetAllRequest {
@@ -35,6 +36,16 @@ message AddPlayerRequest {
 }
 
 message AddPlayerReply {
+	string response = 1;
+}
+
+message EditPlayerRequest {
+	int32 id = 1;
+	string name = 2;
+	string image = 3;
+}
+
+message EditPlayerReply {
 	string response = 1;
 }
 

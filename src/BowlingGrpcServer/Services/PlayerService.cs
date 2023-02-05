@@ -37,5 +37,12 @@ namespace BowlingGrpcServer.Services
             addPlayerReply.Response = "Added the player.";
             return addPlayerReply;
         }
+
+        public override async Task<EditPlayerReply> EditPlayer(EditPlayerRequest request, ServerCallContext context)
+        {
+            EditPlayerReply editPlayerReply = new EditPlayerReply();
+            editPlayerReply.Response = "Edited the player.";
+            return editPlayerReply;
+        }
     }
 }
