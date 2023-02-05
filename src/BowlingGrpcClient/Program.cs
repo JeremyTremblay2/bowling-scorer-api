@@ -71,8 +71,11 @@ while (run)
             Console.WriteLine("EditPlayerResult: " + editPlayerResult.Response);
             break;
         case 5:
+            Console.Write("Player's id : ");
+            var playerToDelId = Prompter.PromptInt();
+
             var delPlayerResult = await client.DeletePlayerAsync(
-                  new DeletePlayerRequest { Id = 1 });
+                  new DeletePlayerRequest { Id = playerToDelId });
             Console.WriteLine("DelPlayerResult: " + delPlayerResult.Response);
             break;
         default:

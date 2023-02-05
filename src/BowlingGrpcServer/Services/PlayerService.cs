@@ -74,7 +74,15 @@ namespace BowlingGrpcServer.Services
         public override async Task<DeletePlayerReply> DeletePlayer(DeletePlayerRequest request, ServerCallContext context)
         {
             DeletePlayerReply deletePlayerReply = new DeletePlayerReply();
-            deletePlayerReply.Response = "Deleted the player. ";
+            var ok = await _playerRepository.RemovePlayer(request.Id);
+            if (ok)
+            {
+                deletePlayerReply.Response = "Deleted the player.";
+            }
+            else
+            {
+                deletePlayerReply.Response = "Can't delete the player (he don't exists)";
+            }
             return deletePlayerReply;
         }
     }
