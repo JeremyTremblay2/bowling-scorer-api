@@ -8,6 +8,7 @@ package greet;
 service Player {
   rpc GetAll (GetAllRequest) returns (GetAllReply);
   rpc GetById (GetByIdRequest) returns (GetByIdReply);
+  rpc AddPlayer (AddPlayerRequest) returns (AddPlayerReply);
 }
 
 message GetAllRequest {
@@ -25,6 +26,16 @@ message GetByIdRequest {
 
 message GetByIdReply {
 	PlayerGRPC playerGRPC = 1;
+}
+
+message AddPlayerRequest {
+	int32 id = 1;
+	string name = 2;
+	string image = 3;
+}
+
+message AddPlayerReply {
+	string response = 1;
 }
 
 message PlayerGRPC {

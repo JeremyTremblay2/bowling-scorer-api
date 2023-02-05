@@ -30,5 +30,12 @@ namespace BowlingGrpcServer.Services
             getByIdReply.PlayerGRPC = new PlayerGRPC() { Id = 1, Image = "truc", Name = "machin.png" };
             return getByIdReply;
         }
+
+        public override async Task<AddPlayerReply> AddPlayer(AddPlayerRequest request, ServerCallContext context)
+        {
+            AddPlayerReply addPlayerReply = new AddPlayerReply();
+            addPlayerReply.Response = "Added the player.";
+            return addPlayerReply;
+        }
     }
 }
