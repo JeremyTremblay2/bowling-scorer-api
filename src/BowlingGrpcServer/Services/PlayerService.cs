@@ -59,7 +59,15 @@ namespace BowlingGrpcServer.Services
         public override async Task<EditPlayerReply> EditPlayer(EditPlayerRequest request, ServerCallContext context)
         {
             EditPlayerReply editPlayerReply = new EditPlayerReply();
-            editPlayerReply.Response = "Edited the player.";
+            var ok = await _playerRepository.EditPlayer(new Player(request.Id, request.Name, request.Image));
+            if (ok)
+            {
+                editPlayerReply.Response = "Edited the player.";
+            }
+            else
+            {
+                editPlayerReply.Response = "Can't edit the player (he don't exists)";
+            }
             return editPlayerReply;
         }
 

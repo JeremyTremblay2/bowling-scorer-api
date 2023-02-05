@@ -59,8 +59,15 @@ while (run)
             Console.WriteLine("AddPlayerResult: " + addPlayerResult.Response);
             break;
         case 4:
+            Console.Write("Player's id : ");
+            var playerToEditId = Prompter.PromptInt();
+            Console.Write("Player's Name : ");
+            var playerToEditName = Console.ReadLine();
+            Console.Write("Player's Image : ");
+            var playerToEditImage = Console.ReadLine();
+
             var editPlayerResult = await client.EditPlayerAsync(
-                  new EditPlayerRequest { Id = 1, Name = "toto", Image = "truc.png" });
+                  new EditPlayerRequest { Id = playerToEditId, Name = playerToEditName, Image = playerToEditImage });
             Console.WriteLine("EditPlayerResult: " + editPlayerResult.Response);
             break;
         case 5:
