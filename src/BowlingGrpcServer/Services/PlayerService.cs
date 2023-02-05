@@ -11,12 +11,17 @@ namespace BowlingGrpcServer.Services
             _logger = logger;
         }
 
-        public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+        public override async Task<GetAllReply> GetAll(GetAllRequest request, ServerCallContext context)
         {
-            return Task.FromResult(new HelloReply
+            List<PlayerGRPC> players = new List<PlayerGRPC>()
             {
-                Message = "Hello uwu " + request.Name
-            });
+                new PlayerGRPC(){ Id = 1, Image = "truc", Name = "machin.png"},
+                new PlayerGRPC(){ Id = 1, Image = "truc", Name = "machin.png"},
+                new PlayerGRPC(){ Id = 1, Image = "truc", Name = "machin.png"},
+            };
+            GetAllReply getAllReply = new GetAllReply();
+            getAllReply.PlayerGRPC.AddRange(players);
+            return getAllReply;
         }
     }
 }
