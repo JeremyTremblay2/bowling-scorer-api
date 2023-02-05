@@ -12,7 +12,7 @@ namespace RestfulAPI.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class PlayerController : Controller
-    {
+    {  
         private readonly ILogger _logger;
         private readonly IPlayerService _playerService;
 
@@ -24,11 +24,11 @@ namespace RestfulAPI.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PlayerDTO>))]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(int page, int nbPlayers)
         {
             _logger.LogInformation("API Call : GetAll()");
             List<PlayerDTO> result = new();
-            foreach (Player pl in await _playerService.GetAll())
+            foreach (Player pl in await _playerService.GetAll(page, nbPlayers))
             {
                 result.Add(pl.ToDTO());
             }
@@ -48,6 +48,7 @@ namespace RestfulAPI.Controllers
             }
             catch (FunctionnalException e)
             {
+                _logger.LogError(e.StackTrace);
                 return NotFound(e.Message);
             }
                        
@@ -67,6 +68,7 @@ namespace RestfulAPI.Controllers
             }
             catch (FunctionnalException e)
             {
+                _logger.LogError(e.StackTrace);
                 return BadRequest(e.Message);
             }
         }
@@ -84,6 +86,7 @@ namespace RestfulAPI.Controllers
             }
             catch (FunctionnalException e)
             {
+                _logger.LogError(e.StackTrace);
                 return BadRequest(e.Message);
             }
         }
@@ -101,6 +104,7 @@ namespace RestfulAPI.Controllers
             }
             catch (FunctionnalException e)
             {
+                _logger.LogError(e.StackTrace);
                 return BadRequest(e.Message);
             }
         }
