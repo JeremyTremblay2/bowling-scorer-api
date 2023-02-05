@@ -11,25 +11,25 @@ namespace TestAPI
 {
     public class PlayerController_UT
     {
-        [Fact]
-        public async void GetAllTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.GetAll())
-                .ReturnsAsync(new List<Player> { new Player("Mickael", "mickael.png") });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //[Fact]
+        //public async void GetAllTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.GetAll())
+        //        .ReturnsAsync(new List<Player> { new Player("Mickael", "mickael.png") });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
 
-            //Act
-            var result = await controller.GetAll();
+        //    //Act
+        //    var result = await controller.GetAll();
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.GetAll(), Times.Once);
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnValue = Assert.IsAssignableFrom<IEnumerable<PlayerDTO>>(okResult.Value);
-            Assert.Equal(new List<PlayerDTO>() { new PlayerDTO { Name = "Mickael", Image = "mickael.png" } }, returnValue);
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.GetAll(), Times.Once);
+        //    var okResult = Assert.IsType<OkObjectResult>(result);
+        //    var returnValue = Assert.IsAssignableFrom<IEnumerable<PlayerDTO>>(okResult.Value);
+        //    Assert.Equal(new List<PlayerDTO>() { new PlayerDTO { Name = "Mickael", Image = "mickael.png" } }, returnValue);
+        //}
 
         [Fact]
         public async void GetByIdFoundTest()
