@@ -39,8 +39,11 @@ while (run)
             Console.WriteLine("GetAllResult: " + getAllResult.PlayerGRPC);
             break;
         case 2:
+            Console.Write("Player's id : ");
+            var playerId = Prompter.PromptInt();
+
             var getByIdResult = await client.GetByIdAsync(
-                  new GetByIdRequest { Id = 1 });
+                  new GetByIdRequest { Id = playerId });
             Console.WriteLine("GetByIdResult: " + getByIdResult.PlayerGRPC);
             break;
         case 3:

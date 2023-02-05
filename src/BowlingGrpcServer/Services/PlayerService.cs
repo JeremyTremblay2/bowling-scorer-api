@@ -33,7 +33,11 @@ namespace BowlingGrpcServer.Services
         public override async Task<GetByIdReply> GetById(GetByIdRequest request, ServerCallContext context)
         {
             GetByIdReply getByIdReply = new GetByIdReply();
-            getByIdReply.PlayerGRPC = new PlayerGRPC() { Id = 1, Image = "truc", Name = "machin.png" };
+            var result = await _playerRepository.GetById(request.Id);
+            if (result is not null)
+            {
+                getByIdReply.PlayerGRPC = result.ToGRPC();
+            }
             return getByIdReply;
         }
 
