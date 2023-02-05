@@ -23,5 +23,12 @@ namespace BowlingGrpcServer.Services
             getAllReply.PlayerGRPC.AddRange(players);
             return getAllReply;
         }
+
+        public override async Task<GetByIdReply> GetById(GetByIdRequest request, ServerCallContext context)
+        {
+            GetByIdReply getByIdReply = new GetByIdReply();
+            getByIdReply.PlayerGRPC = new PlayerGRPC() { Id = 1, Image = "truc", Name = "machin.png" };
+            return getByIdReply;
+        }
     }
 }

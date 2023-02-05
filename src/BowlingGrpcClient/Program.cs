@@ -4,8 +4,11 @@ using Grpc.Net.Client;
 
 using var channel = GrpcChannel.ForAddress("https://localhost:7129");
 var client = new Player.PlayerClient(channel);
-var reply = await client.GetAllAsync(
+var getAllResult = await client.GetAllAsync(
                   new GetAllRequest { Page = 0, NbPlayers = 3 });
-Console.WriteLine("Greeting: " + reply.PlayerGRPC);
+Console.WriteLine("Greeting: " + getAllResult.PlayerGRPC);
+var getByIdResult = await client.GetByIdAsync(
+                  new GetByIdRequest { Id = 1 });
+Console.WriteLine("Greeting: " + getByIdResult.PlayerGRPC);
 Console.WriteLine("Press any key to exit...");
 Console.ReadKey();
