@@ -58,6 +58,11 @@ while (run)
                   new EditPlayerRequest { Id = 1, Name = "toto", Image = "truc.png" });
             Console.WriteLine("EditPlayerResult: " + editPlayerResult.Response);
             break;
+        case 5:
+            var delPlayerResult = await client.DeletePlayerAsync(
+                  new DeletePlayerRequest { Id = 1 });
+            Console.WriteLine("DelPlayerResult: " + delPlayerResult.Response);
+            break;
         default:
             break;
     }

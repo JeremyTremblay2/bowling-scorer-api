@@ -44,5 +44,12 @@ namespace BowlingGrpcServer.Services
             editPlayerReply.Response = "Edited the player.";
             return editPlayerReply;
         }
+
+        public override async Task<DeletePlayerReply> DeletePlayer(DeletePlayerRequest request, ServerCallContext context)
+        {
+            DeletePlayerReply deletePlayerReply = new DeletePlayerReply();
+            deletePlayerReply.Response = "Deleted the player. ";
+            return deletePlayerReply;
+        }
     }
 }

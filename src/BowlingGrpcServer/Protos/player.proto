@@ -10,6 +10,7 @@ service Player {
   rpc GetById (GetByIdRequest) returns (GetByIdReply);
   rpc AddPlayer (AddPlayerRequest) returns (AddPlayerReply);
   rpc EditPlayer (EditPlayerRequest) returns (EditPlayerReply);
+  rpc DeletePlayer (DeletePlayerRequest) returns (DeletePlayerReply);
 }
 
 message GetAllRequest {
@@ -47,6 +48,14 @@ message EditPlayerRequest {
 
 message EditPlayerReply {
 	string response = 1;
+}
+
+message DeletePlayerRequest {
+	int32 id = 1;
+}
+
+message DeletePlayerReply {
+	string response  = 1;
 }
 
 message PlayerGRPC {
