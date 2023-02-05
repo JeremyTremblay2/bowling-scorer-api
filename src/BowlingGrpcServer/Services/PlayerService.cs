@@ -1,24 +1,30 @@
 using BowlingGrpcServer;
+using DTOtoModel;
 using Grpc.Core;
+using Model;
+using Repositories;
 
 namespace BowlingGrpcServer.Services
 {
-    public class PlayerService : Player.PlayerBase
+    public class PlayerService : PlayerGRPCService.PlayerGRPCServiceBase
     {
         private readonly ILogger<PlayerService> _logger;
-        public PlayerService(ILogger<PlayerService> logger)
+        private readonly IPlayerRepository _playerRepository;
+
+        public PlayerService(ILogger<PlayerService> logger, IPlayerRepository playerRepository)
         {
             _logger = logger;
+            _playerRepository = playerRepository;
         }
 
         public override async Task<GetAllReply> GetAll(GetAllRequest request, ServerCallContext context)
         {
-            List<PlayerGRPC> players = new List<PlayerGRPC>()
+            IEnumerable<Player> playersFound = await _playerRepository.GetAll(request.Page, request.NbPlayers);
+            List<PlayerGRPC> players = new List<PlayerGRPC>();
+            foreach (Player player in playersFound)
             {
-                new PlayerGRPC(){ Id = 1, Image = "truc", Name = "machin.png"},
-                new PlayerGRPC(){ Id = 1, Image = "truc", Name = "machin.png"},
-                new PlayerGRPC(){ Id = 1, Image = "truc", Name = "machin.png"},
-            };
+                players.Add(player.ToGRPC());
+            }
             GetAllReply getAllReply = new GetAllReply();
             getAllReply.PlayerGRPC.AddRange(players);
             return getAllReply;

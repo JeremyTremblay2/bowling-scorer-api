@@ -5,7 +5,7 @@ option csharp_namespace = "BowlingGrpcClient";
 package player;
 
 // The greeting service definition.
-service Player {
+service PlayerGRPCService {
   rpc GetAll (GetAllRequest) returns (GetAllReply);
   rpc GetById (GetByIdRequest) returns (GetByIdReply);
   rpc AddPlayer (AddPlayerRequest) returns (AddPlayerReply);

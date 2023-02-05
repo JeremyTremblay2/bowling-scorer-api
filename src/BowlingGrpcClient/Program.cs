@@ -4,7 +4,7 @@ using Grpc.Net.Client;
 using System.Linq.Expressions;
 
 using var channel = GrpcChannel.ForAddress("https://localhost:7129");
-var client = new Player.PlayerClient(channel);
+var client = new PlayerGRPCService.PlayerGRPCServiceClient(channel);
 
 bool run = true;
 
@@ -20,18 +20,8 @@ while (run)
     Console.WriteLine("5- DeletePlayer");
     Console.WriteLine("0- QUIT");
     Console.WriteLine("-------------------------");
-    Console.WriteLine("Your choice : ");
-    Int32 resp;
-    try
-    {
-        resp = Convert.ToInt32(Console.ReadLine());
-    } catch (FormatException e)
-    {
-        continue;
-    } catch(OverflowException e)
-    {
-        continue;
-    }
+    Console.Write("Your choice : ");
+    var resp = Prompter.PromptInt();
     Console.WriteLine("=========================");
     switch (resp)
     {
@@ -39,8 +29,13 @@ while (run)
             run= false;
             break;
         case 1:
+            Console.Write("Page number : ");
+            var page = Prompter.PromptInt();
+            Console.Write("Number of player per page : ");
+            var nbPlayers = Prompter.PromptInt();
+
             var getAllResult = await client.GetAllAsync(
-                  new GetAllRequest { Page = 0, NbPlayers = 3 });
+                  new GetAllRequest { Page = page, NbPlayers = nbPlayers });
             Console.WriteLine("GetAllResult: " + getAllResult.PlayerGRPC);
             break;
         case 2:
