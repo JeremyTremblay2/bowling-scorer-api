@@ -53,11 +53,15 @@ namespace RestfulAPITests.Controllers
 
         private bool FakeEditPlayer(Player player)
         {
-            if (PlayerStub().Where(p => player.ID == p.ID).FirstOrDefault() is null)
+            if (player.ID == 2)
             {
-                return false;
+                return true;
             }
-            return true;
+            if (player.ID > 4)
+            {
+                throw new FunctionnalException("The player that you want to edit doesn't exists");
+            }
+            return false;
         }
 
         private bool FakeDeletePlayer(Player player)
@@ -192,7 +196,7 @@ namespace RestfulAPITests.Controllers
         }
 
         [TestMethod]
-        public async Task AddPlayerSavingErrorTest()
+        public async Task AddPlayerDBErrorTest()
         {
             var player = new PlayerDTO { ID = 2, Image = "moi.png", Name = "Moi" };
 
@@ -209,9 +213,48 @@ namespace RestfulAPITests.Controllers
         }
 
         [TestMethod]
-        public void EditTest()
+        public async Task EditTest()
         {
+            var player = new PlayerDTO { ID = 2, Image = "modif.png", Name = "Modif" };
 
+            var result = await controller.Edit(player);
+
+            service.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
+            result.Should().BeAssignableTo<OkObjectResult>();
+            var okResult = result as OkObjectResult;
+            okResult?.Value.Should().NotBeNull();
+            okResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("Successfuly edited the player id : 2");
+        }
+
+        [TestMethod]
+        public async Task EditFailedTest()
+        {
+            var player = new PlayerDTO { ID = 7, Image = "modif.png", Name = "Modif" };
+
+            var result = await controller.Edit(player);
+
+            service.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
+            result.Should().BeAssignableTo<BadRequestObjectResult>();
+            var badRequestResult = result as BadRequestObjectResult;
+            badRequestResult?.Value.Should().NotBeNull();
+            badRequestResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("The player that you want to edit doesn't exists");
+        }
+
+        [TestMethod]
+        public async Task EditDBErrorTest()
+        {
+            var player = new PlayerDTO { ID = -1, Image = "modif.png", Name = "Modif" };
+
+            var result = await controller.Edit(player);
+
+            service.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
+            result.Should().BeAssignableTo<ObjectResult>();
+            var badRequestResult = result as ObjectResult;
+            badRequestResult?.Value.Should().NotBeNull();
+            badRequestResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("Error in the Data base.");
         }
 
         [TestMethod]
