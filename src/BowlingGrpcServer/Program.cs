@@ -9,8 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 
-//Add the pl
+//Add the repositories
 builder.Services.AddSingleton<IPlayerRepository, PlayerRepository>();
+builder.Services.AddSingleton<IStatisticRepository, StatisticsRepository>();
 
 var app = builder.Build();
 
