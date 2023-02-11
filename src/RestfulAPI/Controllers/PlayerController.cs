@@ -58,13 +58,20 @@ namespace RestfulAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Add([Bind("Id, Name, Image")] PlayerDTO playerDTO)
         {
             _logger.LogInformation($"API Call : Add(), Arguments = \"{playerDTO}\"");
             try
             {
-                await _playerService.AddPlayer(playerDTO.ToModel());
-                return Ok("Successfuly added the player id : " + playerDTO.ID);
+                if (await _playerService.AddPlayer(playerDTO.ToModel()))
+                {
+                    return Ok("Successfuly added the player id : " + playerDTO.ID);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Error in the Data base.");
+                }
             }
             catch (FunctionnalException e)
             {
@@ -76,13 +83,20 @@ namespace RestfulAPI.Controllers
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Edit([Bind("Id, Name, Image")] PlayerDTO playerDTO)
         {
             _logger.LogInformation($"API Call : Edit(), Arguments = \"{playerDTO}\"");
             try
             {
-                await _playerService.EditPlayer(playerDTO.ToModel());
-                return Ok("Successfuly edited the player id : " + playerDTO.ID);
+                if (await _playerService.EditPlayer(playerDTO.ToModel()))
+                {
+                    return Ok("Successfuly edited the player id : " + playerDTO.ID);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Error in the Data base.");
+                }
             }
             catch (FunctionnalException e)
             {
@@ -94,13 +108,20 @@ namespace RestfulAPI.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
             _logger.LogInformation($"API Call : Delete(), Arguments = Id=\"{id}\"");
             try
             {
-                await _playerService.DeletePlayer(id);
-                return Ok("Successfuly delete the player id : " + id);
+                if (await _playerService.DeletePlayer(id))
+                {
+                    return Ok("Successfuly delete the player id : " + id);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Error in the Data base.");
+                }
             }
             catch (FunctionnalException e)
             {

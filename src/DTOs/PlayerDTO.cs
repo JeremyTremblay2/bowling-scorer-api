@@ -1,6 +1,6 @@
 ﻿namespace DTOs
 {
-    public class PlayerDTO : IEquatable<PlayerDTO>
+    public class PlayerDTO
     {
         /// <summary>
         /// A unique identifier for the player.
@@ -16,12 +16,6 @@
         /// The profil picture of the player.
         /// </summary>
         public string Image { get; set; }
-
-        public bool Equals(PlayerDTO? other)
-        {
-            if (other is null) return false;
-            return other.ID == ID && other.Name== Name && other.Image == Image;
-        }
 
         public override string ToString()
         {
