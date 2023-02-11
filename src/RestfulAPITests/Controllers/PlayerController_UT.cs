@@ -29,8 +29,7 @@ namespace RestfulAPITests.Controllers
             service.Setup(service => service.GetAll(It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(Task.FromResult(PlayerStub()));
             service.Setup(service => service.GetById(It.IsAny<int>()))
-                .Returns(new Func<int, Task<Player>>((id) => Task.FromResult(PlayerStub().Where(p => p.ID == id)
-                .FirstOrDefault(def => throw new FunctionnalException("This player doesn't exists.")))));
+                .Returns(new Func<int, Task<Player>>((id) => Task.FromResult(FakeGetById(id))));
             service.Setup(service => service.AddPlayer(It.IsAny<Player>()))
                 .Returns(new Func<Player, Task<bool>>((player) => Task.FromResult(FakeAddPlayer(player))));
             service.Setup(service => service.DeletePlayer(It.IsAny<int>()))
@@ -39,6 +38,16 @@ namespace RestfulAPITests.Controllers
                 .Returns(new Func<Player, Task<bool>>((player) => Task.FromResult(FakeEditPlayer(player))));
 
             controller = new PlayerController(logger, service.Object);
+        }
+
+        private Player? FakeGetById(int id)
+        {
+            Player? p = PlayerStub().Where(p => p.ID == id).First();
+            if (p is null)
+            {
+                throw new FunctionnalException("This player doesn't exists.");   
+            }
+            return p;
         }
 
         private bool FakeEditPlayer(Player player)
@@ -120,7 +129,16 @@ namespace RestfulAPITests.Controllers
         [TestMethod]
         public async Task GetByIdTest()
         {
-            var result = await controller.GetAll(0, 3);
+            //Act
+            var result = await controller.GetById(1);
+
+            //Assert
+            service.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
+            result.Should().BeAssignableTo<OkObjectResult>();
+            var okResult = result as OkObjectResult;
+            okResult.Should().NotBeNull();
+            okResult.Value.Should().BeAssignableTo<PlayerDTO>();
+            okResult.Value.Should().BeEquivalentTo(new PlayerDTO { ID = 1, Name = "Jeremy", Image = "jeremy.png"});
         }
 
         [TestMethod]
