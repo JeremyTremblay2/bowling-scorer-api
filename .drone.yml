@@ -58,6 +58,18 @@ steps:
       branch:
         - master
     depends_on: [ build ]
+ 
+  - name: docker-build-and-push    
+    image: plugins/docker    
+    settings:       
+      dockerfile: src/Dockerfile       
+      context: src/       
+      registry: hub.codefirst.iut.uca.fr       
+      repo: hub.codefirst.iut.uca.fr/my.login/myRepository       
+      username:         
+        from_secret: SECRET_REGISTRY_USERNAME       
+      password:         
+        from_secret: SECRET_REGISTRY_PASSWORD
 
 volumes:
 - name: docs
