@@ -41,11 +41,19 @@ namespace Services
 
         public async Task<bool> EditPlayer(Player player)
         {
-            if (GetById(player.ID) is null)
+            Player? p = await GetById(player.ID);
+            if (p is null)
             {
                 throw new FunctionnalException("The player that you want to edit doesn't exists");
             }
-            return await _playerRepository.EditPlayer(player);
+            else if (p.Equals(player))
+            {
+                return true;
+            }
+            else
+            {
+                return await _playerRepository.EditPlayer(player);
+            }
         }
 
         public async Task<bool> DeletePlayer(int id)
