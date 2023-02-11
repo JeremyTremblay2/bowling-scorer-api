@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "BowlingGrpcServer";
 
-package player;
+package bowling;
 
 // The greeting service definition.
 service PlayerGRPCService {
