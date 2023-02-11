@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "BowlingGrpcServer.Protos";
+option csharp_namespace = "BowlingGrpcClient";
 
 package bowling;
 
