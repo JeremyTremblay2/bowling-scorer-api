@@ -34,7 +34,7 @@ namespace RestfulAPITests.Controllers
             service.Setup(service => service.AddPlayer(It.IsAny<Player>()))
                 .Returns(new Func<Player, Task<bool>>((player) => Task.FromResult(FakeAddPlayer(player))));
             service.Setup(service => service.DeletePlayer(It.IsAny<int>()))
-                .Returns(new Func<Player, Task<bool>>((player) => Task.FromResult(FakeDeletePlayer(player))));
+                .Returns(new Func<int, Task<bool>>((id) => Task.FromResult(FakeDeletePlayer(id))));
             service.Setup(service => service.EditPlayer(It.IsAny<Player>()))
                 .Returns(new Func<Player, Task<bool>>((player) => Task.FromResult(FakeEditPlayer(player))));
 
@@ -64,11 +64,16 @@ namespace RestfulAPITests.Controllers
             return false;
         }
 
-        private bool FakeDeletePlayer(Player player)
+        private bool FakeDeletePlayer(int id)
         {
-            if (PlayerStub().Where(p => player.ID == p.ID).FirstOrDefault() is null)
+            // Simulate DB error
+            if (id == 7)
             {
                 return false;
+            }
+            if (id > 4)
+            {
+                throw new FunctionnalException("The player that you want to delete doesn't exists");
             }
             return true;
         }
@@ -258,10 +263,44 @@ namespace RestfulAPITests.Controllers
         }
 
         [TestMethod]
-        public void DeleteTest()
+        public async Task DeleteTest()
         {
+            var result = await controller.Delete(1);
 
+            service.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
+            result.Should().BeAssignableTo<OkObjectResult>();
+            var okResult = result as OkObjectResult;
+            okResult?.Value.Should().NotBeNull();
+            okResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("Successfuly delete the player id : 1");
+        }
+
+        [TestMethod]
+        public async Task DeleteFailedTest()
+        {
+            //Act
+            var result = await controller.Delete(16);
+
+            //Assert
+            service.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
+            result.Should().BeAssignableTo<BadRequestObjectResult>();
+            var badRequestResult = result as BadRequestObjectResult;
+            badRequestResult?.Value.Should().NotBeNull();
+            badRequestResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("The player that you want to delete doesn't exists");
+        }
+
+        [TestMethod]
+        public async Task DeleteDBErrorTest()
+        {
+            var result = await controller.Delete(7);
+
+            service.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
+            result.Should().BeAssignableTo<ObjectResult>();
+            var badRequestResult = result as ObjectResult;
+            badRequestResult?.Value.Should().NotBeNull();
+            badRequestResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("Error in the Data base.");
         }
     }
-
 }
