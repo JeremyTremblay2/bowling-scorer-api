@@ -31,258 +31,258 @@ namespace TestAPI
         //    Assert.Equal(new List<PlayerDTO>() { new PlayerDTO { Name = "Mickael", Image = "mickael.png" } }, returnValue);
         //}
 
-        [Fact]
-        public async void GetByIdFoundTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.GetById(It.IsAny<int>()))
-                .Returns<int>(async (id) =>
-                {
-                    if (id == 1)
-                    {
-                        return new Player(id, "Mickael", "mickael.png");
-                    }
-                    throw new FunctionnalException("This player doesn't exists.");
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //[Fact]
+        //public async void GetByIdFoundTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.GetById(It.IsAny<int>()))
+        //        .Returns<int>(async (id) =>
+        //        {
+        //            if (id == 1)
+        //            {
+        //                return new Player(id, "Mickael", "mickael.png");
+        //            }
+        //            throw new FunctionnalException("This player doesn't exists.");
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
 
-            //Act
-            var result = await controller.GetById(1);
+        //    //Act
+        //    var result = await controller.GetById(1);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.NotNull(okResult.Value);
-            var returnValue = Assert.IsAssignableFrom<PlayerDTO>(okResult.Value);
-            Assert.Equal(new PlayerDTO { ID = 1, Name = "Mickael", Image = "mickael.png" }, returnValue);
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
+        //    var okResult = Assert.IsType<OkObjectResult>(result);
+        //    Assert.NotNull(okResult.Value);
+        //    var returnValue = Assert.IsAssignableFrom<PlayerDTO>(okResult.Value);
+        //    Assert.Equal(new PlayerDTO { ID = 1, Name = "Mickael", Image = "mickael.png" }, returnValue);
+        //}
 
-        [Fact]
-        public async void GetByIdNotFoundTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.GetById(It.IsAny<int>()))
-                .Returns<int>(async (id) =>
-                {
-                    if (id == 1)
-                    {
-                        return new Player(id, "Mickael", "mickael.png");
-                    }
-                    throw new FunctionnalException("This player doesn't exists.");
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //[Fact]
+        //public async void GetByIdNotFoundTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.GetById(It.IsAny<int>()))
+        //        .Returns<int>(async (id) =>
+        //        {
+        //            if (id == 1)
+        //            {
+        //                return new Player(id, "Mickael", "mickael.png");
+        //            }
+        //            throw new FunctionnalException("This player doesn't exists.");
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
 
-            //Act
-            var result = await controller.GetById(65);
+        //    //Act
+        //    var result = await controller.GetById(65);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
-            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
-            Assert.NotNull(notFoundResult.Value);
-            Assert.Equal(notFoundResult.Value, "This player doesn't exists.");
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
+        //    var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+        //    Assert.NotNull(notFoundResult.Value);
+        //    Assert.Equal(notFoundResult.Value, "This player doesn't exists.");
+        //}
 
-        [Fact]
-        public async void AddPlayerTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
-                .Returns<Player>(async (player) =>
-                {
-                    if (player.ID == 1)
-                    {
-                        throw new FunctionnalException("A player with the same ID already exists");
-                    }
-                    if (player.ID == 2)
-                    {
-                        throw new FunctionnalException("Failed to add the player (error while saving)");
-                    }
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
-            var player = new PlayerDTO { ID = 3, Image = "moi.png", Name = "Moi" };
+        //[Fact]
+        //public async void AddPlayerTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
+        //        .Returns<Player>(async (player) =>
+        //        {
+        //            if (player.ID == 1)
+        //            {
+        //                throw new FunctionnalException("A player with the same ID already exists");
+        //            }
+        //            if (player.ID == 2)
+        //            {
+        //                throw new FunctionnalException("Failed to add the player (error while saving)");
+        //            }
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //    var player = new PlayerDTO { ID = 3, Image = "moi.png", Name = "Moi" };
 
-            //Act
-            var result = await controller.Add(player);
+        //    //Act
+        //    var result = await controller.Add(player);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.NotNull(okResult.Value);
-            Assert.Equal(okResult.Value, "Successfuly added the player id : 3");
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
+        //    var okResult = Assert.IsType<OkObjectResult>(result);
+        //    Assert.NotNull(okResult.Value);
+        //    Assert.Equal(okResult.Value, "Successfuly added the player id : 3");
+        //}
 
-        [Fact]
-        public async void AddPlayerAlreadyExistsTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
-                .Returns<Player>(async (player) =>
-                {
-                    if (player.ID == 1)
-                    {
-                        throw new FunctionnalException("A player with the same ID already exists");
-                    }
-                    if (player.ID == 2)
-                    {
-                        throw new FunctionnalException("Failed to add the player (error while saving)");
-                    }
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
-            var player = new PlayerDTO { ID = 1, Image = "moi.png", Name = "Moi" };
+        //[Fact]
+        //public async void AddPlayerAlreadyExistsTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
+        //        .Returns<Player>(async (player) =>
+        //        {
+        //            if (player.ID == 1)
+        //            {
+        //                throw new FunctionnalException("A player with the same ID already exists");
+        //            }
+        //            if (player.ID == 2)
+        //            {
+        //                throw new FunctionnalException("Failed to add the player (error while saving)");
+        //            }
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //    var player = new PlayerDTO { ID = 1, Image = "moi.png", Name = "Moi" };
 
-            //Act
-            var result = await controller.Add(player);
+        //    //Act
+        //    var result = await controller.Add(player);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.NotNull(badRequestResult.Value);
-            Assert.Equal(badRequestResult.Value, "A player with the same ID already exists");
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        //    Assert.NotNull(badRequestResult.Value);
+        //    Assert.Equal(badRequestResult.Value, "A player with the same ID already exists");
+        //}
 
-        [Fact]
-        public async void AddPlayerSavingErrorTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
-                .Returns<Player>(async (player) =>
-                {
-                    if (player.ID == 1)
-                    {
-                        throw new FunctionnalException("A player with the same ID already exists");
-                    }
-                    if (player.ID == 2)
-                    {
-                        throw new FunctionnalException("Failed to add the player (error while saving)");
-                    }
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
-            var player = new PlayerDTO { ID = 2, Image = "moi.png", Name = "Moi" };
+        //[Fact]
+        //public async void AddPlayerSavingErrorTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.AddPlayer(It.IsAny<Player>()))
+        //        .Returns<Player>(async (player) =>
+        //        {
+        //            if (player.ID == 1)
+        //            {
+        //                throw new FunctionnalException("A player with the same ID already exists");
+        //            }
+        //            if (player.ID == 2)
+        //            {
+        //                throw new FunctionnalException("Failed to add the player (error while saving)");
+        //            }
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //    var player = new PlayerDTO { ID = 2, Image = "moi.png", Name = "Moi" };
 
-            //Act
-            var result = await controller.Add(player);
+        //    //Act
+        //    var result = await controller.Add(player);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.NotNull(badRequestResult.Value);
-            Assert.Equal(badRequestResult.Value, "Failed to add the player (error while saving)");
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        //    Assert.NotNull(badRequestResult.Value);
+        //    Assert.Equal(badRequestResult.Value, "Failed to add the player (error while saving)");
+        //}
 
-        [Fact]
-        public async void EditPlayerTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.EditPlayer(It.IsAny<Player>()))
-                .Returns<Player>(async (player) =>
-                {
-                    if (player.ID == 16)
-                    {
-                        throw new FunctionnalException("The player that you want to edit doesn't exists");
-                    }
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
-            var player = new PlayerDTO { ID = 3, Image = "moi.png", Name = "Moi" };
+        //[Fact]
+        //public async void EditPlayerTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.EditPlayer(It.IsAny<Player>()))
+        //        .Returns<Player>(async (player) =>
+        //        {
+        //            if (player.ID == 16)
+        //            {
+        //                throw new FunctionnalException("The player that you want to edit doesn't exists");
+        //            }
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //    var player = new PlayerDTO { ID = 3, Image = "moi.png", Name = "Moi" };
 
-            //Act
-            var result = await controller.Edit(player);
+        //    //Act
+        //    var result = await controller.Edit(player);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.NotNull(okResult.Value);
-            Assert.Equal(okResult.Value, "Successfuly edited the player id : 3");
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
+        //    var okResult = Assert.IsType<OkObjectResult>(result);
+        //    Assert.NotNull(okResult.Value);
+        //    Assert.Equal(okResult.Value, "Successfuly edited the player id : 3");
+        //}
 
-        [Fact]
-        public async void EditPlayerFailedTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.EditPlayer(It.IsAny<Player>()))
-                .Returns<Player>(async (player) =>
-                {
-                    if (player.ID == 16)
-                    {
-                        throw new FunctionnalException("The player that you want to edit doesn't exists");
-                    }
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
-            var player = new PlayerDTO { ID = 16, Image = "moi.png", Name = "Moi" };
+        //[Fact]
+        //public async void EditPlayerFailedTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.EditPlayer(It.IsAny<Player>()))
+        //        .Returns<Player>(async (player) =>
+        //        {
+        //            if (player.ID == 16)
+        //            {
+        //                throw new FunctionnalException("The player that you want to edit doesn't exists");
+        //            }
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //    var player = new PlayerDTO { ID = 16, Image = "moi.png", Name = "Moi" };
 
-            //Act
-            var result = await controller.Edit(player);
+        //    //Act
+        //    var result = await controller.Edit(player);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.NotNull(badRequestResult.Value);
-            Assert.Equal(badRequestResult.Value, "The player that you want to edit doesn't exists");
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.EditPlayer(It.IsAny<Player>()), Times.Once);
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        //    Assert.NotNull(badRequestResult.Value);
+        //    Assert.Equal(badRequestResult.Value, "The player that you want to edit doesn't exists");
+        //}
 
-        [Fact]
-        public async void DeletePlayerTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.DeletePlayer(It.IsAny<int>()))
-                .Returns<int>(async (id) =>
-                {
-                    if (id == 16)
-                    {
-                        throw new FunctionnalException("The player that you want to delete doesn't exists");
-                    }
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //[Fact]
+        //public async void DeletePlayerTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.DeletePlayer(It.IsAny<int>()))
+        //        .Returns<int>(async (id) =>
+        //        {
+        //            if (id == 16)
+        //            {
+        //                throw new FunctionnalException("The player that you want to delete doesn't exists");
+        //            }
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
 
-            //Act
-            var result = await controller.Delete(1);
+        //    //Act
+        //    var result = await controller.Delete(1);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.NotNull(okResult.Value);
-            Assert.Equal(okResult.Value, "Successfuly delete the player id : 1");
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
+        //    var okResult = Assert.IsType<OkObjectResult>(result);
+        //    Assert.NotNull(okResult.Value);
+        //    Assert.Equal(okResult.Value, "Successfuly delete the player id : 1");
+        //}
 
-        [Fact]
-        public async void DeletePlayerFailedTest()
-        {
-            //Arrange
-            var _mockPlayerService = new Mock<IPlayerService>();
-            _mockPlayerService.Setup(service => service.DeletePlayer(It.IsAny<int>()))
-                .Returns<int>(async (id) =>
-                {
-                    if (id == 16)
-                    {
-                        throw new FunctionnalException("The player that you want to delete doesn't exists");
-                    }
-                });
-            var _mockLoger = new NullLogger<PlayerController>();
-            var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
+        //[Fact]
+        //public async void DeletePlayerFailedTest()
+        //{
+        //    //Arrange
+        //    var _mockPlayerService = new Mock<IPlayerService>();
+        //    _mockPlayerService.Setup(service => service.DeletePlayer(It.IsAny<int>()))
+        //        .Returns<int>(async (id) =>
+        //        {
+        //            if (id == 16)
+        //            {
+        //                throw new FunctionnalException("The player that you want to delete doesn't exists");
+        //            }
+        //        });
+        //    var _mockLoger = new NullLogger<PlayerController>();
+        //    var controller = new PlayerController(_mockLoger, _mockPlayerService.Object);
 
-            //Act
-            var result = await controller.Delete(16);
+        //    //Act
+        //    var result = await controller.Delete(16);
 
-            //Assert
-            _mockPlayerService.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.NotNull(badRequestResult.Value);
-            Assert.Equal(badRequestResult.Value, "The player that you want to delete doesn't exists");
-        }
+        //    //Assert
+        //    _mockPlayerService.Verify(mock => mock.DeletePlayer(It.IsAny<int>()), Times.Once);
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        //    Assert.NotNull(badRequestResult.Value);
+        //    Assert.Equal(badRequestResult.Value, "The player that you want to delete doesn't exists");
+        //}
     }
 }

@@ -9,6 +9,7 @@ using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -70,14 +71,15 @@ namespace RestfulAPITests.Controllers
 
         private bool FakeAddPlayer(Player player)
         {
-            if (PlayerStub().Where(p => player.ID == p.ID).FirstOrDefault() is not null)
+            // Simulate alreday exists
+            if (player.ID == 1)
             {
-                return false;
+                throw new FunctionnalException("A player with the same ID already exists");
             }
-            // To trigger this exception too
+            // Simulate error in DB
             if (player.ID == 2)
             {
-                throw new FunctionnalException("Failed to add the player (error while saving)");
+                return false;
             }
             return true;
         }
@@ -115,10 +117,10 @@ namespace RestfulAPITests.Controllers
             result.Should().BeAssignableTo<OkObjectResult>();
             var respResult = result as OkObjectResult;
             respResult.Should().NotBeNull();
-            respResult.Value.Should().BeAssignableTo<IEnumerable<PlayerDTO>>();
+            respResult?.Value.Should().BeAssignableTo<IEnumerable<PlayerDTO>>();
 
             List<PlayerDTO> excepted = PlayerStubDTO();
-            List<PlayerDTO>? resp = respResult.Value as List<PlayerDTO>;
+            List<PlayerDTO>? resp = respResult?.Value as List<PlayerDTO>;
             resp.Should().NotBeNull();
             if (resp is not null)
             {
@@ -137,8 +139,8 @@ namespace RestfulAPITests.Controllers
             result.Should().BeAssignableTo<OkObjectResult>();
             var okResult = result as OkObjectResult;
             okResult.Should().NotBeNull();
-            okResult.Value.Should().BeAssignableTo<PlayerDTO>();
-            okResult.Value.Should().BeEquivalentTo(new PlayerDTO { ID = 1, Name = "Jeremy", Image = "jeremy.png"});
+            okResult?.Value.Should().BeAssignableTo<PlayerDTO>();
+            okResult?.Value.Should().BeEquivalentTo(new PlayerDTO { ID = 1, Name = "Jeremy", Image = "jeremy.png" });
         }
 
         [TestMethod]
@@ -151,14 +153,59 @@ namespace RestfulAPITests.Controllers
             service.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
             result.Should().BeAssignableTo<NotFoundObjectResult>();
             var notFoundResult = result as NotFoundObjectResult;
-            notFoundResult.Value.Should().NotBeNull();
-            notFoundResult.Value.Should().BeEquivalentTo("This player doesn't exists.");
+            notFoundResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("This player doesn't exists.");
         }
 
         [TestMethod]
         public async Task AddTest()
         {
+            var player = new PlayerDTO { ID = 6, Image = "baptiste.png", Name = "Baptiste" };
 
+            //Act
+            var result = await controller.Add(player);
+
+            //Assert
+            service.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
+            result.Should().BeAssignableTo<OkObjectResult>();
+            var okResult = result as OkObjectResult;
+            okResult.Should().NotBeNull();
+            okResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("Successfuly added the player id : 6");
+        }
+
+        [TestMethod]
+        public async Task AddPlayerAlreadyExistsTest()
+        {
+            var player = new PlayerDTO { ID = 1, Image = "moi.png", Name = "Moi" };
+
+            //Act
+            var result = await controller.Add(player);
+
+            //Assert
+            service.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
+            result.Should().BeAssignableTo<BadRequestObjectResult>();
+            var badRequestResult = result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
+            badRequestResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("A player with the same ID already exists");
+        }
+
+        [TestMethod]
+        public async Task AddPlayerSavingErrorTest()
+        {
+            var player = new PlayerDTO { ID = 2, Image = "moi.png", Name = "Moi" };
+
+            //Act
+            var result = await controller.Add(player);
+
+            //Assert
+            service.Verify(mock => mock.AddPlayer(It.IsAny<Player>()), Times.Once);
+            result.Should().BeAssignableTo<ObjectResult>();
+            var badRequestResult = result as ObjectResult;
+            badRequestResult?.Value.Should().NotBeNull();
+            badRequestResult?.Value.Should().NotBeNull()
+                .And.BeEquivalentTo("Error in the Data base.");
         }
 
         [TestMethod]
