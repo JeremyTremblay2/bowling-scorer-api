@@ -42,7 +42,7 @@ namespace RestfulAPITests.Controllers
 
         private Player? FakeGetById(int id)
         {
-            Player? p = PlayerStub().Where(p => p.ID == id).First();
+            Player? p = PlayerStub().Where(p => p.ID == id).FirstOrDefault();
             if (p is null)
             {
                 throw new FunctionnalException("This player doesn't exists.");   
@@ -139,6 +139,20 @@ namespace RestfulAPITests.Controllers
             okResult.Should().NotBeNull();
             okResult.Value.Should().BeAssignableTo<PlayerDTO>();
             okResult.Value.Should().BeEquivalentTo(new PlayerDTO { ID = 1, Name = "Jeremy", Image = "jeremy.png"});
+        }
+
+        [TestMethod]
+        public async Task GetByIdNotFoundTest()
+        {
+            //Act
+            var result = await controller.GetById(65);
+
+            //Assert
+            service.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
+            result.Should().BeAssignableTo<NotFoundObjectResult>();
+            var notFoundResult = result as NotFoundObjectResult;
+            notFoundResult.Value.Should().NotBeNull();
+            notFoundResult.Value.Should().BeEquivalentTo("This player doesn't exists.");
         }
 
         [TestMethod]
