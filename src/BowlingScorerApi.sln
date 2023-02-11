@@ -27,9 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GrpcAPI", "GrpcAPI", "{1189CB8D-9F39-41F3-BEF7-2B396CE17E2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BowlingGrpcServer", "BowlingGrpcServer\BowlingGrpcServer.csproj", "{E7FC9881-7A21-4A42-968B-9F7A4DA06B98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BowlingGrpcServer", "BowlingGrpcServer\BowlingGrpcServer.csproj", "{E7FC9881-7A21-4A42-968B-9F7A4DA06B98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BowlingGrpcClient", "BowlingGrpcClient\BowlingGrpcClient.csproj", "{FCF7AC19-3D74-478E-AA89-C12D03C1EC1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BowlingGrpcClient", "BowlingGrpcClient\BowlingGrpcClient.csproj", "{FCF7AC19-3D74-478E-AA89-C12D03C1EC1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D8C881E1-E77C-48FF-8959-08F1A39658EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulAPITests", "RestfulAPITests\RestfulAPITests.csproj", "{ED521526-7F52-4D27-9A31-EDD1E5E6606A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +89,10 @@ Global
 		{FCF7AC19-3D74-478E-AA89-C12D03C1EC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCF7AC19-3D74-478E-AA89-C12D03C1EC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCF7AC19-3D74-478E-AA89-C12D03C1EC1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED521526-7F52-4D27-9A31-EDD1E5E6606A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED521526-7F52-4D27-9A31-EDD1E5E6606A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED521526-7F52-4D27-9A31-EDD1E5E6606A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED521526-7F52-4D27-9A31-EDD1E5E6606A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +101,7 @@ Global
 		{7682A8AC-A30E-4960-ACAB-97BF23146E0D} = {8160B279-30AC-419E-A911-C927AD15D356}
 		{E7FC9881-7A21-4A42-968B-9F7A4DA06B98} = {1189CB8D-9F39-41F3-BEF7-2B396CE17E2A}
 		{FCF7AC19-3D74-478E-AA89-C12D03C1EC1A} = {1189CB8D-9F39-41F3-BEF7-2B396CE17E2A}
+		{ED521526-7F52-4D27-9A31-EDD1E5E6606A} = {D8C881E1-E77C-48FF-8959-08F1A39658EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DAE18406-FC11-45BC-A74E-BDC5058F31CC}
