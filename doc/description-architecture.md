@@ -1,5 +1,5 @@
 # Architecture diagram of Bowling Scorer API
-<img src="doc/Description-architecture.png"/>
+<img src="Description-architecture.png"/>
 
 ## Description
 
