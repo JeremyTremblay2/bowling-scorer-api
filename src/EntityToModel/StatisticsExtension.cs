@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace EntityToModel
 {
-    public static class StatisticExtension
+    public static class StatisticsExtension
     {
-        public static StatisticEntity ToEntity(this Statistics statistics)
+        public static StatisticsEntity ToEntity(this Statistics statistics)
         {
-            return new StatisticEntity
+            return new StatisticsEntity
             {
                 ID = statistics.ID,
                 NumberOfVictory= statistics.NumberOfVictory,
@@ -23,7 +23,7 @@ namespace EntityToModel
             };
         }
 
-        public static Statistics ToModel(this StatisticEntity statisticsEntity)
+        public static Statistics ToModel(this StatisticsEntity statisticsEntity)
         {
             return new Statistics(statisticsEntity.ID, statisticsEntity.NumberOfVictory, statisticsEntity.NumberOfDefeat, statisticsEntity.NumberOfGames, statisticsEntity.BestScore);
         }

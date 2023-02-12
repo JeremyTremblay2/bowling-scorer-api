@@ -11,7 +11,7 @@ namespace Entities
     /// <summary>
     /// This Entity represents some statistics in a database.
     /// </summary>
-    public class StatisticEntity
+    public class StatisticsEntity
     {
         /// <summary>
         /// Represents the ID of the statistics.

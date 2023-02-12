@@ -18,7 +18,7 @@ namespace Entities
         /// </summary>
         public DbSet<PlayerEntity>? Players { get; set; }
 
-        public DbSet<StatisticEntity>? Statistics { get; set; }
+        public DbSet<StatisticsEntity>? Statistics { get; set; }
 
         public BowlingDbContext()
         { }
@@ -55,7 +55,7 @@ namespace Entities
                                                .ValueGeneratedOnAdd();
 
             // Statistics
-            modelBuilder.Entity<StatisticEntity>().ToTable("Statistics");
+            modelBuilder.Entity<StatisticsEntity>().ToTable("Statistics");
 
             /*modelBuilder.Entity<PlayerEntity>()
                         .HasOne(p => p.Statistics) 
@@ -73,8 +73,8 @@ namespace Entities
 
             string randomImagesWebsite = @"https://picsum.photos/400";
 
-            var stats = new StatisticEntity[] {
-                new StatisticEntity
+            var stats = new StatisticsEntity[] {
+                new StatisticsEntity
                 {
                     ID = 1,
                     BestScore = 170,
@@ -83,7 +83,7 @@ namespace Entities
                     NumberOfGames = 7,
                     //Scores = { 78, 101, 120, 170, 147, 98, 121 }
                 },
-                new StatisticEntity
+                new StatisticsEntity
                 {
                     ID = 2,
                     BestScore = 184,
@@ -92,7 +92,7 @@ namespace Entities
                     NumberOfGames = 5,
                     //Scores = { 142, 89, 184, 75, 86 }
                 },
-                new StatisticEntity
+                new StatisticsEntity
                 {
                     ID = 3,
                     BestScore = 0,
@@ -114,13 +114,13 @@ namespace Entities
             stats[1].Player = players[1];
             stats[2].Player = players[2];*/
 
-            modelBuilder.Entity<StatisticEntity>().HasData(
-                new StatisticEntity { ID = 1, BestScore = 42, NumberOfDefeat = 2, NumberOfGames = 5, NumberOfVictory = 3 },
-                new StatisticEntity { ID = 2, BestScore = 23, NumberOfDefeat = 4, NumberOfGames = 7, NumberOfVictory = 2 },
-                new StatisticEntity { ID = 3, BestScore = 65, NumberOfDefeat = 3, NumberOfGames = 15, NumberOfVictory = 12 }
+            modelBuilder.Entity<StatisticsEntity>().HasData(
+                new StatisticsEntity { ID = 1, BestScore = 42, NumberOfDefeat = 2, NumberOfGames = 5, NumberOfVictory = 3 },
+                new StatisticsEntity { ID = 2, BestScore = 23, NumberOfDefeat = 4, NumberOfGames = 7, NumberOfVictory = 2 },
+                new StatisticsEntity { ID = 3, BestScore = 65, NumberOfDefeat = 3, NumberOfGames = 15, NumberOfVictory = 12 }
             );
 
-            modelBuilder.Entity<StatisticEntity>().HasData(stats);
+            modelBuilder.Entity<StatisticsEntity>().HasData(stats);
             modelBuilder.Entity<PlayerEntity>().HasData(players);
 
             base.OnModelCreating(modelBuilder);
