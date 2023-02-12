@@ -10,11 +10,11 @@ namespace DTOs
 {
     public class StatisticDTO
     {
-        public int ID { get; private set; }
-        public int NumberOfVictory { get; private set; }
-        public int NumberOfDefeat { get; private set; }
-        public int NumberOfGames { get; private set; }
-        public int BestScore { get; private set; }
+        public int ID { get; set; }
+        public int NumberOfVictory { get; set; }
+        public int NumberOfDefeat { get; set; }
+        public int NumberOfGames { get; set; }
+        public int BestScore { get; set; }
 
         public override string ToString()
         {
