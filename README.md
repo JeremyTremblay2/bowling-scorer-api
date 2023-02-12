@@ -122,10 +122,12 @@ dotnet ef database update bowlingMigration --project ../Entities --context Bowli
 
 ## 📌 Documentation & developper guidance
 
-If you want to participate to this project, be sure to check the documentation before, on the [Wiki](https://codefirst.iut.uca.fr/git/jeremy.tremblay/bowling-scorer-api/wiki) of this project.
+API Choice description : [here](api-choice-description.md)</br>
+API Gateway description : [here](api-gateway-description.md)</br>
+Architecture description : [here](description-architecture.md)
 
 Also, look at the `doc` folder at the root of this repository!
-
+---
 ## 👤 Authors
 
 **Jérémy TREMBLAY**
