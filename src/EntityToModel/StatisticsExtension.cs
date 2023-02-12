@@ -11,9 +11,9 @@ namespace EntityToModel
 {
     public static class StatisticsExtension
     {
-        public static StatisticsEntity ToEntity(this Statistics statistics)
+        public static StatisticEntity ToEntity(this Statistics statistics)
         {
-            return new StatisticsEntity
+            return new StatisticEntity
             {
                 ID = statistics.ID,
                 NumberOfVictory= statistics.NumberOfVictory,
@@ -23,7 +23,7 @@ namespace EntityToModel
             };
         }
 
-        public static Statistics ToModel(this StatisticsEntity statisticsEntity)
+        public static Statistics ToModel(this StatisticEntity statisticsEntity)
         {
             return new Statistics(statisticsEntity.ID, statisticsEntity.NumberOfVictory, statisticsEntity.NumberOfDefeat, statisticsEntity.NumberOfGames, statisticsEntity.BestScore);
         }

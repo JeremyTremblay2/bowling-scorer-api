@@ -1,6 +1,6 @@
 {
   "Routes": [
-    // Player API
+    // Player 
     {
       "UpstreamPathTemplate": "/api/Player",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
@@ -24,8 +24,32 @@
         }
       ],
       "DownstreamPathTemplate": "/api/v1/Player/{id}"
+    },
+    // Statistics 
+    {
+      "UpstreamPathTemplate": "/api/Statistics",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7209
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/Statistics"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Statistics/{id}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7209
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/Statistics/{id}"
     }
-
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:5072"
