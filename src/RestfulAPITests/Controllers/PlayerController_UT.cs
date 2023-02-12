@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Model;
+using Model.Players;
 using Moq;
 using RestfulAPI.Controllers;
 using Services;

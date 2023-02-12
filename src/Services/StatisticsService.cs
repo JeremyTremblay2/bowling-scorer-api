@@ -38,7 +38,7 @@ namespace Services
         {
             if (GetById(statistics.ID) is null)
             {
-                throw new StatisticsAlreadyExistsException("Som statistics already exist with the same ID");
+                throw new StatisticsAlreadyExistsException("Some statistics already exist with the same ID");
             }
             else if (statistics.NumberOfGames < 0 || statistics.NumberOfDefeat > statistics.NumberOfGames
                 || statistics.NumberOfVictory > statistics.NumberOfGames
