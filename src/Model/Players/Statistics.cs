@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Model.Players
 {
     /// <summary>
     /// Statistics represent various data collected through different games of bowling and are intrinsic to a particular player.
@@ -46,17 +46,13 @@ namespace Model
         /// </summary>
         public int BestScore { get; private set; }
 
-        /// <summary>
-        /// Contains all the scores achieved by the player in each game played.
-        /// </summary>
-        public ReadOnlyCollection<int> Scores { get; private set; }
-
-        /// <summary>
-        /// Returns the average score achieved by the player over all of his games.
-        /// </summary>
-        public double MediumScore
+        public Statistics(int iD, int numberOfVictory, int numberOfDefeat, int numberOfGames, int bestScore)
         {
-            get => Scores.Count == 0 ? 0 : Scores.Average();
+            ID = iD;
+            NumberOfVictory = numberOfVictory;
+            NumberOfDefeat = numberOfDefeat;
+            NumberOfGames = numberOfGames;
+            BestScore = bestScore;
         }
 
         /// <summary>
@@ -72,7 +68,6 @@ namespace Model
             this.ID = ID;
             NumberOfVictory = NumberOfDefeat = BestScore = 0;
             _scores = scores == null ? new List<int>() : new List<int>(scores);
-            Scores = new ReadOnlyCollection<int>(_scores);
         }
 
         /// <summary>
@@ -95,7 +90,11 @@ namespace Model
         /// <returns>True if the specified object is equal to the current object; otherwise, False.</returns>
         public bool Equals(Statistics other)
         {
-            return other != null && other.Scores.SequenceEqual(Scores) && other.BestScore == BestScore;
+            return other != null 
+                && other.BestScore == BestScore 
+                && other.NumberOfDefeat== NumberOfDefeat
+                && other.NumberOfVictory == NumberOfVictory
+                && other.NumberOfGames == NumberOfGames;
         }
 
         /// <summary>
@@ -113,8 +112,8 @@ namespace Model
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return string.Format("Statistics of {0} games. Victories: {1}. Defeats: {2}. \nBest Score: {3}. \nMedium Score: {4} ",
-                NumberOfGames, NumberOfVictory, NumberOfDefeat, BestScore, MediumScore);
+            return string.Format("Statistics of {0} games. Victories: {1}. Defeats: {2}. \nBest Score: {3}", 
+                NumberOfGames, NumberOfVictory, NumberOfDefeat, BestScore);
         }
 
         /// <summary>
@@ -202,28 +201,5 @@ namespace Model
         /// <returns>A boolean indicating the result of the comparison.</returns>
         public static bool operator !=(Statistics left, Statistics right)
             => !(left == right);
-
-        /// <summary>
-        /// Adds a score to the results.
-        /// </summary>
-        /// <param name="score">The score to be added.</param>
-        private void AddScore(int score)
-        {
-            if (score > BestScore)
-            {
-                BestScore = score;
-            }
-            _scores.Add(score);
-        }
-
-        /// <summary>
-        /// Removes a score to the results.
-        /// </summary>
-        /// <param name="score">The score to be removed.</param>
-        private void RemoveScore(int score)
-        {
-            _scores.Remove(score);
-            BestScore = Scores.Count == 0 ? 0 : Scores.Max();
-        }
     }
 }

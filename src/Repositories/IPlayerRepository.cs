@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.Players;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Repositories
         /// Return all the players in the DB
         /// </summary>
         /// <returns>All players in the DB</returns>
-        Task<IEnumerable<Player>> GetAll();
+        Task<IEnumerable<Player>> GetAll(int page, int nbPlayers);
 
         /// <summary>
         /// Get the first players specified from the stated index ordered by the ID.

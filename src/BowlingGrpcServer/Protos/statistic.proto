@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option csharp_namespace = "BowlingGrpcServer.Protos";
+
+package bowling;
+
+service StatisticGRPCService {
+  rpc GetAll (GetAllStatisticRequest) returns (GetAllStatisticReply);
+  rpc GetById (GetByIdStatisticRequest) returns (GetByIdStatisticReply);
+  rpc AddStatistic (AddStatisticRequest) returns (AddStatisticReply);
+  rpc EditStatistic (EditStatisticRequest) returns (EditStatisticReply);
+  rpc DeleteStatistic (DeleteStatisticRequest) returns (DeleteStatisticReply);
+}
+
+message GetAllStatisticRequest {
+	int32 page = 1;
+	int32 nbStat = 2;
+}
+
+message GetAllStatisticReply {
+	repeated StatisticGRPC statisticGRPC = 1;
+}
+
+message GetByIdStatisticRequest {
+	int32 id = 1;
+}
+
+message GetByIdStatisticReply {
+	StatisticGRPC statisticGRPC = 1;
+}
+
+message AddStatisticRequest {
+	int32 id = 1;
+	int32 numberOfVictory = 2;
+	int32 numberOfDefeat = 3;
+	int32 numberOfGames = 4;
+	int32 bestScore = 5;
+}
+
+message AddStatisticReply {
+	string response = 1;
+}
+
+message EditStatisticRequest {
+	int32 id = 1;
+	int32 numberOfVictory = 2;
+	int32 numberOfDefeat = 3;
+	int32 numberOfGames = 4;
+	int32 bestScore = 5;
+}
+
+message EditStatisticReply {
+	string response = 1;
+}
+
+message DeleteStatisticRequest {
+	int32 id = 1;
+}
+
+message DeleteStatisticReply {
+	string response  = 1;
+}
+
+message StatisticGRPC {
+	int32 id = 1;
+	int32 numberOfVictory = 2;
+	int32 numberOfDefeat = 3;
+	int32 numberOfGames = 4;
+	int32 bestScore = 5;
+}

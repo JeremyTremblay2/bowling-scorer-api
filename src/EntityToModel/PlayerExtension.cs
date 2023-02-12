@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Model;
+using Model.Players;
 using System;
 using System.Collections.Generic;
 using System.Linq;

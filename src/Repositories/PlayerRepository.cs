@@ -2,6 +2,7 @@
 using EntityToModel;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using Model.Players;
 using Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Repositories
 {
     public class PlayerRepository : IPlayerRepository
     {
-        public async Task<IEnumerable<Player>> GetAll()
+        public async Task<IEnumerable<Player>> GetAll(int page, int nbPlayers)
         {
             using (BowlingDbContext context = new())
             {
@@ -25,6 +26,8 @@ namespace Repositories
                 if (context.Players is not null)
                 {
                     players = await context.Players
+                        .Skip(nbPlayers*page)
+                        .Take(nbPlayers)
                         .Select(pl => pl.ToModel())
                         .ToListAsync(); // force the query
                 }
@@ -48,7 +51,10 @@ namespace Repositories
                         return false;
                     }
                 }
-                return false;
+                else
+                {
+                    return false;
+                }
             }
         }
 

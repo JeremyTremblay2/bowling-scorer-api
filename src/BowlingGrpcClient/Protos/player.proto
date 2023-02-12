@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option csharp_namespace = "BowlingGrpcClient";
+
+package bowling;
+
+// The greeting service definition.
+service PlayerGRPCService {
+  rpc GetAll (GetAllRequest) returns (GetAllReply);
+  rpc GetById (GetByIdRequest) returns (GetByIdReply);
+  rpc AddPlayer (AddPlayerRequest) returns (AddPlayerReply);
+  rpc EditPlayer (EditPlayerRequest) returns (EditPlayerReply);
+  rpc DeletePlayer (DeletePlayerRequest) returns (DeletePlayerReply);
+}
+
+message GetAllRequest {
+	int32 page = 1;
+	int32 nbPlayers = 2;
+}
+
+message GetAllReply {
+	repeated PlayerGRPC playerGRPC = 1;
+}
+
+message GetByIdRequest {
+	int32 id = 1;
+}
+
+message GetByIdReply {
+	PlayerGRPC playerGRPC = 1;
+}
+
+message AddPlayerRequest {
+	int32 id = 1;
+	string name = 2;
+	string image = 3;
+}
+
+message AddPlayerReply {
+	string response = 1;
+}
+
+message EditPlayerRequest {
+	int32 id = 1;
+	string name = 2;
+	string image = 3;
+}
+
+message EditPlayerReply {
+	string response = 1;
+}
+
+message DeletePlayerRequest {
+	int32 id = 1;
+}
+
+message DeletePlayerReply {
+	string response  = 1;
+}
+
+message PlayerGRPC {
+	int32 id = 1;
+	string name = 2;
+	string image = 3;
+}

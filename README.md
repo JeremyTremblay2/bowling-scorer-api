@@ -27,25 +27,26 @@ This project will use and cover a Restful API for the player part, and use some 
 These features will be available in the future, when the API will be completely finished, so stay tuned to be notified when there will be available !
 
 ### 🕹️ Restful API
-- [ ] Request player's data (name, url of his profile picture, ID...)
-- [ ] Get the statistics of the players (medium throw, best score, number of games (won, loose...), throws results and scores more generally).
-- [ ] Create players and change their names and profile pictures, and also their statistics.
+- [✅] Request player's data (name, url of his profile picture, ID...)
+- [✅] Get the statistics of the players (best score, number of games (won, loose...), scores more generally).
+- [✅] Create players and change their names and profile pictures, and also their statistics.
 
-### 🎙️ Web sockets
-- [ ] Get information about bowling games (date of the game, status...)
-- [ ] Get informations about the scores (detail for each player present in the game), current cell in the scoretable, current score...
-- [ ] Add and edit the scores in the score table, create some games and achieve them.
+### 🎙️ GRPC API
+- [✅] Get information about bowling players
+- [✅] Get informations about the scores
+- [✅] CRUD Methods on players
+- [✅] CRUD Methods on statistics
 
 ## 🧱 Structure of the project
 
-To realize such a work, we have structured this project following a certain architecture, here is it:
-> ⚠️ Under construction
+To realize such a work, we have structured this project following a certain architecture, here is it [Architecture Description](description-architecture.md)
 
 ## 🖥️ Langages and technologies used
 
 - C# ([API reference](https://learn.microsoft.com/en-US/dotnet/csharp/))
 - EntityFramework ([API reference](https://learn.microsoft.com/en-US/ef/))
 - ASP .NET & API development ([API reference](https://learn.microsoft.com/en-US/aspnet/core/))
+- GRPC ([API reference](https://learn.microsoft.com/fr-fr/aspnet/core/grpc/basics?view=aspnetcore-7.0))
 
 ## 🧵 Prerequisities
 
@@ -53,26 +54,71 @@ To realize such a work, we have structured this project following a certain arch
 
 ## ⚙️ How to run the app ?
 
-1. Start Visual Studio.
-2. Open the solution in `src/`.
-3. Open a terminal or a PowerShell instance and place you in the RestfulAPI project:
+* Start Visual Studio.
+* Open the solution in `src/` named `BowlingScorerAPI`.
+---
+### 🔖 If you want to run the RestFul API
 
+* Open a terminal or a PowerShell instance and place you in the RestfulAPI project:
 ```ps
-
 cd RestfulAPI
-
 ```
+* Create the database by using these commands: 
 
-4. Create the database by using these commands: 
+> If **dotnet ef** is not installed on your computer :
+>```ps
+>dotnet tool install dotnet-ef
+>```
+>If you are on one of the IUT's computer :
+>```ps
+>dotnet new tool-manifest
+>dotnet tool install dotnet-ef
+>```
 
+* Generate **migrations** and **database**:
 ```ps
-
 dotnet ef migrations add bowlingMigration --project ../Entities --context BowlingDbContext
 dotnet ef database update bowlingMigration --project ../Entities --context BowlingDbContext
-
 ```
+* You can't use directly the API, you need to start the Ocelot gateway to access it
+    * Right click on solution
+    * Select "Properties.."
+    * Select "Starting Projects"
+    * Check "Multiple Starting Projects"
+        * Select Start on "RestfulAPI" and "ApiGateway"
+* Start the project.
+* You maybe would to have a graphical interface to explore the requests in the API. To do this, you can use Postman and import the solution that is in the "postman" folder at the root of the project
+---
+### 🔖 If you want to run the GRPC API
+* Open a terminal or a PowerShell instance and place you in the RestfulAPI project:
+```ps
+cd BowlingGrpcServer
+```
+* Create the database by using these commands: 
 
-5. You can now run the application and try it out.
+> If **dotnet ef** is not installed on your computer :
+>```ps
+>dotnet tool install dotnet-ef
+>```
+>If you are on one of the IUT's computer :
+>```ps
+>dotnet new tool-manifest
+>dotnet tool install dotnet-ef
+>```
+
+* Generate **migrations** and **database**:
+```ps
+dotnet ef migrations add bowlingMigration --project ../Entities --context BowlingDbContext
+dotnet ef database update bowlingMigration --project ../Entities --context BowlingDbContext
+```
+* You can't use directly the GRPC API
+    * Right click on solution
+    * Select "Properties.."
+    * Select "Starting Projects"
+    * Check "Multiple Starting Projects"
+        * Select Start on "BowlingGrpcServer", "BowlingGrpcClient" and "StatisticsGrpcClient"
+* Start the project.
+---
 
 ## 📌 Documentation & developper guidance
 
@@ -94,6 +140,6 @@ Also, look at the `doc` folder at the root of this repository!
 
 ## 📝 License
 
-I want to leave the possibility to other people to work on this project, to improve it and to make it grow, that's why we decided to place it under MIT license.
+We want to leave the possibility to other people to work on this project, to improve it and to make it grow, that's why we decided to place it under MIT license.
 
 > Read more about the [MIT licence](https://opensource.org/licenses/MIT).

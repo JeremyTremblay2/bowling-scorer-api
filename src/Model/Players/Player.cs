@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Model.Players
 {
     /// <summary>
     /// A Player represent someone with a name, an image (a profile picture), and a unique identifier.

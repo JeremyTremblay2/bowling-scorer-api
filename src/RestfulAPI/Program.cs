@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Repositories;
 using Services;
 
@@ -19,6 +20,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IPlayerService, PlayerService>();
 builder.Services.AddSingleton<IPlayerRepository, PlayerRepository>();
+
+builder.Services.AddApiVersioning(o =>
+{
+    o.ApiVersionReader = new HeaderApiVersionReader("api-version");
+});
 
 var app = builder.Build();
 

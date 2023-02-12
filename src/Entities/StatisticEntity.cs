@@ -1,13 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Entities
 {
     /// <summary>
     /// This Entity represents some statistics in a database.
     /// </summary>
-    [Table("Statistics")]
-    public class StatisticsEntity
+    public class StatisticEntity
     {
         /// <summary>
         /// Represents the ID of the statistics.
