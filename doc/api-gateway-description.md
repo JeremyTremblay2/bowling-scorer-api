@@ -1,6 +1,6 @@
 # API Gateway description
 
-<img src="doc/ApiGateway.png"> </br>
+<img src="ApiGateway.png"> </br>
 
 ### API Gateway Description Diagram
 ---

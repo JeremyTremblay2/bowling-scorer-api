@@ -39,7 +39,7 @@ These features will be available in the future, when the API will be completely 
 
 ## 🧱 Structure of the project
 
-To realize such a work, we have structured this project following a certain architecture, here is it [Architecture Description](description-architecture.md)
+To realize such a work, we have structured this project following a certain architecture, here is it [Architecture Description](doc/description-architecture.md)
 
 ## 🖥️ Langages and technologies used
 
