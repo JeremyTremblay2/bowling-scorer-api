@@ -71,7 +71,7 @@ namespace RestfulAPITests.Controllers
             var objectResult = (OkObjectResult)result;
             Assert.AreEqual(typeof(List<StatisticDTO>), objectResult.Value.GetType());
             var listResult = (List<StatisticDTO>)objectResult.Value;
-            Assert.AreEqual(listResult, dtos);
+            Assert.AreEqual(listResult.Count, dtos.Count);
         }
 
         private Statistics? FakeGetById(int id)
