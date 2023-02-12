@@ -1,5 +1,8 @@
 ﻿namespace DTOs
 {
+    /// <summary>
+    /// Represent a Data Transfert Object that contains the Player.
+    /// </summary>
     public class PlayerDTO
     {
         /// <summary>
@@ -17,6 +20,10 @@
         /// </summary>
         public string Image { get; set; }
 
+        /// <summary>
+        /// Display the object in a string version of it.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"PlayerDTO[ID:{ID}, Name:{Name}, Image:{Image}]";
