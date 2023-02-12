@@ -20,6 +20,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IPlayerService, PlayerService>();
 builder.Services.AddSingleton<IPlayerRepository, PlayerRepository>();
+builder.Services.AddSingleton<IStatisticService, StatisticsService>();
+builder.Services.AddSingleton<IStatisticRepository, StatisticsRepository>();
 
 builder.Services.AddApiVersioning(o =>
 {

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
+    /// <summary>
+    /// Interface representing a rpeository for the statistics.
+    /// </summary>
     public interface IStatisticRepository
     {
         /// <summary>

@@ -2,6 +2,7 @@
 using EntityToModel;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using Model.Players;
 using Repositories;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,16 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
+    /// <summary>
+    /// Class implementing the interface used by DataManagers, allow the developer to choose the persistance mode by using
+    /// polymorphism (strategy). Contains methods to add, ge tand remove players and games.
+    /// </summary>
     public class PlayerRepository : IPlayerRepository
     {
+        /// <summary>
+        /// Return all the players in the DB
+        /// </summary>
+        /// <returns>All players in the DB</returns>
         public async Task<IEnumerable<Player>> GetAll(int page, int nbPlayers)
         {
             using (BowlingDbContext context = new())
@@ -34,6 +43,11 @@ namespace Repositories
             }
         }
 
+        /// <summary>
+        /// Add a player to the DB.
+        /// </summary>
+        /// <param name="player">The player to add.</param>
+        /// <returns>A boolean indicating if the player was added.</returns>
         public async Task<bool> AddPlayer(Player player)
         {
             using (BowlingDbContext context = new())
@@ -57,6 +71,11 @@ namespace Repositories
             }
         }
 
+        /// <summary>
+        /// Return the speficied player if he exists
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Player if he exists, null if he doesn't exists</returns>
         public async Task<Player?> GetById(int id)
         {
             using (BowlingDbContext context = new())
@@ -73,6 +92,11 @@ namespace Repositories
             }
         }
 
+        /// <summary>
+        /// Change the name and the image of the specified player.
+        /// </summary>
+        /// <param name="player">The player to edit.</param>
+        /// <returns>A boolean indicating if the player was succesfully updated.</returns>
         public async Task<bool> EditPlayer(Player player)
         {
             using (BowlingDbContext context = new())
@@ -91,6 +115,12 @@ namespace Repositories
             return false;
         }
 
+        /// <summary>
+        /// Get the first players specified from the stated index ordered by the ID.
+        /// </summary>
+        /// <param name="index">The index to get the first players.</param>
+        /// <param name="count">The number of players to get.</param>
+        /// <returns>The collection of players retrieve.</returns>
         public async Task<IEnumerable<Player>> GetPlayers(int index, int count)
         {
             using (BowlingDbContext context = new())
@@ -107,6 +137,11 @@ namespace Repositories
             }
         }
 
+        /// <summary>
+        /// Remove a player from the manager.
+        /// </summary>
+        /// <param name="id">Id of the player to remove</param>
+        /// <returns>A boolean indicating if the player was removed.</returns>
         public async Task<bool> RemovePlayer(int id)
         {
             using (BowlingDbContext context = new())

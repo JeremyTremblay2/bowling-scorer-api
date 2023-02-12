@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Model.Players
 {
@@ -12,7 +14,18 @@ namespace Model.Players
     /// </summary>
     public class Statistics : IEquatable<Statistics>, IComparable, IComparable<Statistics>
     {
+        private readonly IList<int> _scores;
+
+        /// <summary>
+        /// Represents the ID of the statistics.
+        /// </summary>
         public int ID { get; private set; }
+
+        /// <summary>
+        /// The player who owns these statistics.
+        /// </summary>
+        //public Player Player { get; private set; }
+
         /// <summary>
         /// Represents the number of total wins by a player.
         /// </summary>
@@ -40,6 +53,21 @@ namespace Model.Players
             NumberOfDefeat = numberOfDefeat;
             NumberOfGames = numberOfGames;
             BestScore = bestScore;
+        }
+
+        /// <summary>
+        /// Create a new instance of statistics.
+        /// </summary>
+        public Statistics(/*Player player, */int numberOfVictory = 0, int numberOfDefeat = 0, IEnumerable<int>? scores = null, int ID = 0)
+        {
+            //Player = player ?? throw new ArgumentNullException(nameof(player), "Te player given in parameter cannot be null.");
+            //if (!player.Statistics.Equals(this)) throw new ArgumentException("The player's statistics are not the same as these ones.");
+            NumberOfVictory = numberOfVictory < 0 ? throw new ArgumentException("The number of victory cannot be negative.", nameof(numberOfVictory)) : numberOfVictory;
+            NumberOfVictory = numberOfDefeat < 0 ? throw new ArgumentException("The number of defeat cannot be negative.", nameof(numberOfDefeat)) : numberOfDefeat;
+            NumberOfVictory = scores?.Count() ?? 0;
+            this.ID = ID;
+            NumberOfVictory = NumberOfDefeat = BestScore = 0;
+            _scores = scores == null ? new List<int>() : new List<int>(scores);
         }
 
         /// <summary>

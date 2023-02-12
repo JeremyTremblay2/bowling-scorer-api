@@ -2,6 +2,7 @@
 using DTOtoModel;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Model.Players;
 using Services;
 using System.Numerics;
 using System.Runtime.CompilerServices;

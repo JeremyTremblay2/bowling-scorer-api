@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTOs
+namespace Services
 {
     /// <summary>
-    /// A custom exception class that represents a functional error.
+    /// Exception class representing a statistics already exists error.
     /// </summary>
-    public class FunctionnalException : ArgumentException
+    public class StatisticsAlreadyExistsException : ArgumentException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FunctionnalException"/> class.
+        /// Initializes a new instance of the <see cref="StatisticsAlreadyExistsException"/> class.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public FunctionnalException(string? message) : base(message)
+        public StatisticsAlreadyExistsException(string? message) : base(message)
         {
         }
     }

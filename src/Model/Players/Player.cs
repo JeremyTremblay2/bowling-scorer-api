@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Model.Players
 {
     /// <summary>
     /// A Player represent someone with a name, an image (a profile picture), and a unique identifier.
@@ -20,12 +21,12 @@ namespace Model
         /// <summary>
         /// The name of the player.
         /// </summary>
-        public string Name { get; internal set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The profil picture of the player.
         /// </summary>
-        public string Image { get; internal set; }
+        public string Image { get; private set; }
 
         /// <summary>
         /// The player's statistics.
@@ -39,7 +40,7 @@ namespace Model
         /// <param name="name">The name of the player.</param>
         /// <param name="image">The image of the player.</param>
         /// <exception cref="ArgumentNullException">If the player's name or image is null or empty.</exception>
-        public Player(int ID, string name, string image)
+        public Player(int ID, string name, string image/*, Statistics? statistics = null*/)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -48,7 +49,8 @@ namespace Model
             this.ID = ID;
             Name = name;
             Image = image;
-            //Statistics = new Statistics();
+            //Statistics = statistics ?? new Statistics(this);
+            //if (!Statistics.Player.Equals(this)) throw new ArgumentException("The player is not the owner of these statistics.");
         }
 
         /// <summary>

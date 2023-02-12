@@ -1,5 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
+using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
 
 
 namespace Entities
@@ -69,4 +74,3 @@ namespace Entities
         }
     }
 }
-

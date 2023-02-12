@@ -1,5 +1,6 @@
 ﻿using BowlingGrpcServer;
 using Model;
+using Model.Players;
 
 namespace DTOtoModel
 {
