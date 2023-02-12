@@ -14,6 +14,8 @@ namespace Entities
         /// </summary>
         public DbSet<PlayerEntity>? Players { get; set; }
 
+        public DbSet<StatisticEntity>? Statistics { get; set; }
+
         public BowlingDbContext()
         { }
 
@@ -52,6 +54,15 @@ namespace Entities
                 new PlayerEntity { ID = 1, Name = "Mickael", Image = "imageMickael.png" },
                 new PlayerEntity { ID = 2, Name = "Jeremy", Image = "imageJeremy.png" },
                 new PlayerEntity { ID = 3, Name = "Lucas", Image = "imageLucas.png" }
+            );
+
+            // Statistics
+            modelBuilder.Entity<StatisticEntity>().ToTable("Statistics");
+
+            modelBuilder.Entity<StatisticEntity>().HasData(
+                new StatisticEntity { ID = 1, BestScore = 42, NumberOfDefeat = 2, NumberOfGames = 5, NumberOfVictory = 3 },
+                new StatisticEntity { ID = 2, BestScore = 23, NumberOfDefeat = 4, NumberOfGames = 7, NumberOfVictory = 2 },
+                new StatisticEntity { ID = 3, BestScore = 65, NumberOfDefeat = 3, NumberOfGames = 15, NumberOfVictory = 12 }
             );
 
             base.OnModelCreating(modelBuilder);

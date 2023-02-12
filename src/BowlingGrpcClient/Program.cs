@@ -8,7 +8,7 @@ var client = new PlayerGRPCService.PlayerGRPCServiceClient(channel);
 
 bool run = true;
 
-Console.WriteLine("Welcome to the Bowling GRPC Client");
+Console.WriteLine("Welcome to the Player Bowling GRPC Client");
 while (run)
 {
     Console.WriteLine("=========================");
