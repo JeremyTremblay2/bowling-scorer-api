@@ -2,6 +2,7 @@ using BowlingGrpcServer;
 using DTOtoModel;
 using Grpc.Core;
 using Model;
+using Model.Players;
 using Repositories;
 
 namespace BowlingGrpcServer.Services

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "09344ccf-e513-4cbe-80b2-952d29a4c9ef",
-		"name": "PlayerAPI",
+		"name": "Player",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25676898"
 	},
