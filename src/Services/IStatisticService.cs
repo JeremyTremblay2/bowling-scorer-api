@@ -11,7 +11,7 @@ namespace Services
     {
         Task<IEnumerable<Statistics>> GetAll(int page, int nbStatistics);
 
-        Task<Statistics?> GetById(int id);
+        Task<Statistics> GetById(int id);
 
         Task<bool> AddStatistics(Statistics statistics);
 

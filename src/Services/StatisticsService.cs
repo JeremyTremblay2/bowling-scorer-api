@@ -24,7 +24,7 @@ namespace Services
             return await _statisticsRepository.GetAll(page, nbStatistics);
         }
 
-        public async Task<Statistics?> GetById(int id)
+        public async Task<Statistics> GetById(int id)
         {
             Statistics? stats = await _statisticsRepository.GetById(id);
             if (stats is null)
