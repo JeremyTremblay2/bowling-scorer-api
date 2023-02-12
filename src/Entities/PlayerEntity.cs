@@ -25,6 +25,6 @@ namespace Entities
         /// <summary>
         /// The player's statistics.
         /// </summary>
-        public StatisticsEntity Statistics { get; set; }
+        //public StatisticsEntity Statistics { get; set; }
     }
 }

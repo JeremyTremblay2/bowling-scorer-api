@@ -24,7 +24,7 @@ namespace Model
         /// <summary>
         /// The player who owns these statistics.
         /// </summary>
-        public Player Player { get; private set; }
+        //public Player Player { get; private set; }
 
         /// <summary>
         /// Represents the number of total wins by a player.
@@ -62,10 +62,10 @@ namespace Model
         /// <summary>
         /// Create a new instance of statistics.
         /// </summary>
-        public Statistics(Player player, int numberOfVictory = 0, int numberOfDefeat = 0, IEnumerable<int>? scores = null, int ID = 0)
+        public Statistics(/*Player player, */int numberOfVictory = 0, int numberOfDefeat = 0, IEnumerable<int>? scores = null, int ID = 0)
         {
-            Player = player ?? throw new ArgumentNullException(nameof(player), "Te player given in parameter cannot be null.");
-            if (!player.Statistics.Equals(this)) throw new ArgumentException("The player's statistics are not the same as these ones.");
+            //Player = player ?? throw new ArgumentNullException(nameof(player), "Te player given in parameter cannot be null.");
+            //if (!player.Statistics.Equals(this)) throw new ArgumentException("The player's statistics are not the same as these ones.");
             NumberOfVictory = numberOfVictory < 0 ? throw new ArgumentException("The number of victory cannot be negative.", nameof(numberOfVictory)) : numberOfVictory;
             NumberOfVictory = numberOfDefeat < 0 ? throw new ArgumentException("The number of defeat cannot be negative.", nameof(numberOfDefeat)) : numberOfDefeat;
             NumberOfVictory = scores?.Count() ?? 0;

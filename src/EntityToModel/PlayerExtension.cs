@@ -17,13 +17,13 @@ namespace EntityToModel
                 ID = player.ID,
                 Image = player.Image,
                 Name = player.Name,
-                Statistics = player.Statistics.ToEntity()
+                //Statistics = player.Statistics.ToEntity()
             };
         }
 
         public static Player ToModel(this PlayerEntity playerEntity)
         {
-            return new Player(playerEntity.ID, playerEntity.Name, playerEntity.Image, playerEntity.Statistics.ToModel());
+            return new Player(playerEntity.ID, playerEntity.Name, playerEntity.Image /*playerEntity.Statistics.ToModel()*/);
         }
     }
 }

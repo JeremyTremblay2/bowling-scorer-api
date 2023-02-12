@@ -56,10 +56,10 @@ namespace Entities
             modelBuilder.Entity<PlayerEntity>().Property(n => n.ID)
                                                .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<PlayerEntity>()
+            /*modelBuilder.Entity<PlayerEntity>()
                         .HasOne(p => p.Statistics) 
                         .WithOne(s => s.Player)
-                        .HasForeignKey<StatisticsEntity>(s => s.ID);
+                        .HasForeignKey<StatisticsEntity>(s => s.ID);*/
 
             /* Used to save the scores. Not implemented.
             var intArrayValueConverter = new ValueConverter<int[], string>(

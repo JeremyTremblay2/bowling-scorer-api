@@ -18,7 +18,7 @@ namespace Entities
         /// <summary>
         /// The player who owns these statistics.
         /// </summary>
-        public PlayerEntity Player { get; set; }
+        //public PlayerEntity Player { get; set; }
 
         /// <summary>
         /// Represents the number of total wins by a player.

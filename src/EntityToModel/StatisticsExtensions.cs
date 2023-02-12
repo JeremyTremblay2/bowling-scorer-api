@@ -12,7 +12,7 @@ namespace EntityToModel
     {
         public static Statistics ToModel(this StatisticsEntity entity)
         {
-            return new Statistics(entity.Player.ToModel(), entity.NumberOfVictory, entity.NumberOfDefeat, /*entity.Scores*/ null, entity.ID);
+            return new Statistics(/*entity.Player.ToModel(),*/ entity.NumberOfVictory, entity.NumberOfDefeat, /*entity.Scores*/ null, entity.ID);
         }
 
         public static StatisticsEntity ToEntity(this Statistics model)
@@ -25,7 +25,7 @@ namespace EntityToModel
                 NumberOfGames = model.NumberOfGames,
                 //Scores = model.Scores,
                 BestScore = model.BestScore,
-                Player = model.Player.ToEntity()
+                //Player = model.Player.ToEntity()
             };
         }
     }
