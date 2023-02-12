@@ -56,7 +56,7 @@ namespace Repositories
             {
                 if (context.Statistics is not null)
                 {
-                    StatisticsEntity? se = await context.Statistics.FindAsync(statistics.ID);
+                    StatisticEntity? se = await context.Statistics.FindAsync(statistics.ID);
                     if (se != null)
                     {
                         se.NumberOfVictory = statistics.NumberOfVictory;
@@ -102,7 +102,7 @@ namespace Repositories
             {
                 if (context.Statistics is not null)
                 {
-                    StatisticsEntity? se = await context.Statistics.FindAsync(id);
+                    StatisticEntity? se = await context.Statistics.FindAsync(id);
                     if (se is not null)
                     {
                         return se.ToModel();
@@ -145,7 +145,7 @@ namespace Repositories
             {
                 if (context.Statistics is not null)
                 {
-                    StatisticsEntity? se = await context.Statistics.FindAsync(id);
+                    StatisticEntity? se = await context.Statistics.FindAsync(id);
                     if (se is not null)
                     {
                         context.Statistics.Remove(se);
