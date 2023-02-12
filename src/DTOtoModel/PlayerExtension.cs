@@ -4,7 +4,7 @@ using Model.Players;
 
 namespace DTOtoModel
 {
-    public static class PlayerExtention
+    public static class PlayerExtension
     {
         public static PlayerDTO ToDTO(this Player player)
         {
