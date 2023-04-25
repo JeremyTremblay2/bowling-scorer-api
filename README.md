@@ -122,9 +122,9 @@ dotnet ef database update bowlingMigration --project ../Entities --context Bowli
 
 ## 📌 Documentation & developper guidance
 
-API Choice description : [here](api-choice-description.md)</br>
-API Gateway description : [here](api-gateway-description.md)</br>
-Architecture description : [here](description-architecture.md)
+API Choice description : [here](doc/api-choice-description.md)</br>
+API Gateway description : [here](doc/api-gateway-description.md)</br>
+Architecture description : [here](doc/description-architecture.md)
 
 Also, look at the `doc` folder at the root of this repository!
 ---
